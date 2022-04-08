@@ -1,0 +1,20 @@
+detekt {
+    toolVersion = "$detektVersion"
+
+    def inputDirFiles = []
+    rootProject.subprojects.each { module ->
+        inputDirFiles << "$module.projectDir/src/main/java"
+    }
+
+    source = files(inputDirFiles)
+    config = files("$rootDir/config/detekt/detekt.yml")
+
+    autoCorrect = true
+
+    reports {
+        html {
+            enabled = true
+            destination = file("$buildDir/reports/detekt/detekt.html")
+        }
+    }
+}
