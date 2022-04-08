@@ -6,6 +6,7 @@ plugins {
 }
 
 apply from: "$rootDir/base_dependencies.gradle"
+apply from: '../config/detekt/detekt.gradle'
 
 android {
     defaultConfig {

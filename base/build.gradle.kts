@@ -47,11 +47,6 @@ dependencies {
     val navigationFragmentVersion = "2.4.2"
     implementation("androidx.navigation:navigation-fragment-ktx:$navigationFragmentVersion")
 
-    // DI
-    val koinVersion = "3.1.4"
-    implementation("io.insert-koin:koin-android:$koinVersion")
-    implementation("io.insert-koin:koin-core:$koinVersion")
-
     // Logging
     val timberVersion = "5.0.1"
     implementation("com.jakewharton.timber:timber:$timberVersion")

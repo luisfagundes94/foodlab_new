@@ -1,7 +1,9 @@
 package com.luisfagundes.extensions
 
+import android.content.res.Resources
 import android.util.DisplayMetrics
 import android.view.Display
+import android.view.WindowManager
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
@@ -12,8 +14,6 @@ import androidx.navigation.NavDirections
 import timber.log.Timber
 import kotlin.math.roundToInt
 
-fun <F : Fragment> F.requireString(any: Any?) = requireContext().requireString(any)
-
 fun <F : Fragment, L> F.observe(
     liveData: LiveData<L>,
     onChanged: L.() -> Unit
@@ -22,7 +22,9 @@ fun <F : Fragment, L> F.observe(
 fun NavController.navigateWithDirections(navDirections: NavDirections) {
     try {
         navigate(navDirections)
-    } catch (exception: Exception) {
+    } catch (exception: IllegalStateException) {
+        Timber.e(exception)
+    } catch (exception: IllegalArgumentException) {
         Timber.e(exception)
     }
 }
@@ -32,7 +34,7 @@ fun NavController.navigateWithDeepLink(
 ) {
     try {
         navigate(deepLinkDestination.toUri())
-    } catch (exception: Exception) {
+    } catch (exception: IllegalArgumentException) {
         Timber.e(exception)
     }
 }
@@ -46,9 +48,6 @@ fun Fragment.showToast(messageList: List<CharSequence>, duration: Int = Toast.LE
     Toast.makeText(requireContext(), messageList.toString(), duration).show()
 
 fun Fragment.getBestGridSpanCount(posterWidth: Int): Int {
-    val display: Display = requireActivity().windowManager.defaultDisplay
-    val outMetrics = DisplayMetrics()
-    display.getMetrics(outMetrics)
-    val screenWidth = outMetrics.widthPixels.toFloat()
-    return (screenWidth / posterWidth).roundToInt()
+    val screenWidth = Resources.getSystem().displayMetrics.widthPixels
+    return (screenWidth / posterWidth)
 }

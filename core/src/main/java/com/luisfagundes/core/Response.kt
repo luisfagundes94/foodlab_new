@@ -15,6 +15,7 @@ sealed class Response<T> {
         }
 
     companion object {
+        @Suppress("TooGenericExceptionCaught")
         suspend fun <V : Any> of(suspendFunction: suspend () -> V): Response<V> = try {
             val value = suspendFunction()
             Success(value)
@@ -22,6 +23,7 @@ sealed class Response<T> {
             Error(exception)
         }
 
+        @Suppress("TooGenericExceptionCaught")
         suspend fun <V> listOf(suspendFunction: suspend () -> List<V>): Response<List<V>> = try {
             val value = suspendFunction()
             Success(value)

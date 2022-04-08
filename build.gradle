@@ -1,6 +1,7 @@
 import com.luisfagundes.buildSrc.Dependencies
 
 buildscript {
+    ext.detektVersion = "1.20.0-RC2"
     dependencies {
         classpath Dependencies.Gradle.safeArgs
         classpath Dependencies.Gradle.hilt
@@ -11,6 +12,10 @@ buildscript {
             resolutionStrategy.force 'org.objenesis:objenesis:2.6'
         }
     }
+}
+
+plugins {
+    id("io.gitlab.arturbosch.detekt").version("$detektVersion")
 }
 
 plugins {
