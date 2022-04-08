@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewOutlineProvider
 import android.widget.ImageView
 import androidx.annotation.RequiresApi
+import com.luisfagundes.model.PicassoModel
 import com.squareup.picasso.Picasso
 
 fun ImageView.load(url: String) = Picasso
@@ -13,11 +14,11 @@ fun ImageView.load(url: String) = Picasso
     .load(url)
     .into(this)
 
-fun ImageView.loadPoster(url: String?, placeholder: Int, error: Int) = Picasso
+fun ImageView.loadPoster(picassoModel: PicassoModel) = Picasso
     .get()
-    .load(url)
-    .placeholder(placeholder)
-    .error(error)
+    .load(picassoModel.url)
+    .placeholder(picassoModel.placeholderId)
+    .error(picassoModel.errorId)
     .into(this)
 
 
