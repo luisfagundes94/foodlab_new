@@ -1,0 +1,72 @@
+import com.luisfagundes.buildSrc.Versions
+import com.luisfagundes.buildSrc.Dependencies
+
+android {
+    compileSdk Versions.compileSdk
+
+    buildFeatures {
+        viewBinding true
+    }
+
+    buildTypes {
+
+        debug {
+            minifyEnabled false
+            shrinkResources false
+        }
+
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
+        }
+
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = Versions.jvmTargetVersion
+    }
+
+    testOptions {
+        unitTests.returnDefaultValues = true
+        animationsDisabled = true
+    }
+}
+
+dependencies {
+    // Modules
+    implementation project(':core')
+    implementation project(':extensions')
+    implementation project(':domain')
+    implementation project(':data')
+
+    // Core
+    implementation Dependencies.Core.kotlinStdlib
+    implementation Dependencies.Core.appCompat
+    implementation Dependencies.Core.coroutines
+    implementation Dependencies.Core.navigationFragment
+    implementation Dependencies.Core.navigationUi
+    implementation Dependencies.Core.timber
+    implementation Dependencies.Core.constraintLayout
+    implementation Dependencies.Core.material
+
+    // Data
+    implementation Dependencies.Data.retrofit
+    implementation Dependencies.Data.gson
+    implementation Dependencies.Data.okHttp
+    implementation Dependencies.Data.loggingInterceptor
+
+    // DI
+    implementation Dependencies.DI.daggerHilt
+    implementation Dependencies.DI.daggerHiltCompiler
+
+    // Testing
+    testImplementation Dependencies.Test.mockk
+    testImplementation Dependencies.Test.junit
+    testImplementation Dependencies.Test.coroutines
+    testImplementation Dependencies.Test.archCore
+}

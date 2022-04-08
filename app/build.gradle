@@ -1,0 +1,31 @@
+import com.luisfagundes.buildSrc.Versions
+
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+}
+
+apply from: "$rootDir/base_dependencies.gradle"
+
+android {
+    defaultConfig {
+        applicationId Versions.appId
+        minSdk Versions.minSdk
+        targetSdk Versions.targetSdk
+        versionCode Versions.versionCode
+        versionName Versions.versionName
+    }
+    packagingOptions {
+        jniLibs {
+            excludes += ['META-INF/licenses/**', 'META-INF/gradle/incremental.annotation.processors']
+        }
+        resources {
+            excludes += ['**/attach_hotspot_windows.dll', 'META-INF/licenses/**', 'META-INF/AL2.0', 'META-INF/LGPL2.1', 'META-INF/gradle/incremental.annotation.processors']
+        }
+    }
+
+}
+
+sourceSets {
+    test.java.srcDirs += 'src/commons-testing/utils'
+}
