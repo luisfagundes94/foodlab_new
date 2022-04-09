@@ -1,28 +1,31 @@
+import com.luisfagundes.buildSrc.Versions
+import com.luisfagundes.buildSrc.Dependencies
+import org.jetbrains.kotlin.konan.properties.Properties
+import java.io.FileInputStream
+
 plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
 }
 
+val apiKeyPropertiesFile = rootProject.file("apikey.properties")
+val apiKeyProperties = Properties()
+apiKeyProperties.load(FileInputStream(apiKeyPropertiesFile))
+
 android {
-    compileSdk = 32
+    compileSdk = Versions.compileSdk
 
     defaultConfig {
-        minSdk = 21
-        targetSdk = 32
+        minSdk = Versions.minSdk
+        targetSdk = Versions.targetSdk
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
+
+        buildConfigField("String", "API_KEY", "\"${getApiKey()}\"")
+        buildConfigField("String", "BASE_URL", "\"https://api.spoonacular.com/\"")
     }
 
-    buildTypes {
-        release {
-            isMinifyEnabled = false
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
-            )
-        }
-    }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
@@ -34,10 +37,16 @@ android {
 
 dependencies {
 
-    implementation("androidx.core:core-ktx:1.7.0")
-    implementation("androidx.appcompat:appcompat:1.4.1")
-    implementation("com.google.android.material:material:1.5.0")
-    testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.1.3")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0")
+    // Data
+    implementation(Dependencies.Data.retrofit)
+    implementation(Dependencies.Data.retrofitGson)
+    implementation(Dependencies.Data.okHttpLogging)
+    implementation(Dependencies.Data.okHttp)
+    implementation(Dependencies.Data.loggingInterceptor)
+
+    // DI
+    implementation(Dependencies.DI.daggerHilt)
+    implementation(Dependencies.DI.daggerHiltCompiler)
 }
+
+fun getApiKey() = apiKeyProperties["API_KEY"]
