@@ -5,10 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.luisfagundes.extensions.showVisibility
 import com.luisfagundes.foodlab.databinding.ActivityNavigationBinding
 
 class NavigationActivity : AppCompatActivity() {
@@ -32,29 +29,29 @@ class NavigationActivity : AppCompatActivity() {
             R.id.nav_host_fragment_container
         ) as NavHostFragment
         val navController = navHostFragment.navController
-        val appBarConfiguration = AppBarConfiguration(
-            setOf(
-                com.luisfagundes.feature_home.R.id.navigation_home,
-                com.luisfagundes.feature_search.R.id.navigation_search,
-                com.luisfagundes.feature_favorites.R.id.navigation_favorites,
-                com.luisfagundes.feature_pantry.R.id.navigation_pantry
-            )
-        )
 
-        setupImmersiveView(navController, bottomNavView)
-
-        setupActionBarWithNavController(navController, appBarConfiguration)
         bottomNavView.setupWithNavController(navController)
+        binding.toolbar.setupWithNavController(navController, getAppBarConfig())
+        setupAppBarBackButton(navController)
     }
 
-    private fun setupImmersiveView(
-        navController: NavController,
-        bottomNav: BottomNavigationView
-    ) {
+    private fun getAppBarConfig() = AppBarConfiguration(
+        setOf(
+            com.luisfagundes.feature_recipe.R.id.recipeListFragment,
+            com.luisfagundes.feature_search.R.id.searchFragment,
+            com.luisfagundes.feature_favorites.R.id.favoritesFragment,
+            com.luisfagundes.feature_pantry.R.id.pantryFragment
+        )
+    )
+
+    private fun setupAppBarBackButton(navController: NavController) {
         navController.addOnDestinationChangedListener { _, destination, _ ->
-            when (destination.id) {
-                else -> bottomNav.showVisibility()
-            }
+            val topLevelDestinations = getAppBarConfig().topLevelDestinations
+            val isTopLevelDestination = topLevelDestinations.contains(destination.id)
+            
+            if (!isTopLevelDestination) binding.toolbar.setNavigationIcon(
+                R.drawable.ic_baseline_arrow_back_24
+            )
         }
     }
 }
