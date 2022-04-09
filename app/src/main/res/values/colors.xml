@@ -7,4 +7,13 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+
+    <!-- Foodlab Colors -->
+    <color name="blaze_orange">#FF6B01</color>
+    <color name="light_blaze_orange">#FFE5D3</color>
+    <color name="chinese_black">#121212</color>
+    <color name="mine_shaft">#202020</color>
+    <color name="dark_orange">#c43a00</color>
+    <color name="grenadier">#C43A00</color>
 </resources>

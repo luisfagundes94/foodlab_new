@@ -3,6 +3,7 @@ import com.luisfagundes.buildSrc.Versions
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    id 'androidx.navigation.safeargs.kotlin'
 }
 
 apply from: "$rootDir/base_dependencies.gradle"
@@ -29,4 +30,11 @@ android {
 
 sourceSets {
     test.java.srcDirs += 'src/commons-testing/utils'
+}
+
+dependencies {
+    // Modules
+    implementation project(':feature-home')
+    implementation project(':feature-pantry')
+    implementation project(':feature-favorites')
 }
