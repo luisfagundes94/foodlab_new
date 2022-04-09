@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">foodlab</string>
-    <string name="tv_home">Home</string>
-    <string name="tv_favorites">Favorites</string>
-    <string name="tv_pantry">Pantry</string>
+    <string name="title_home">Home</string>
+    <string name="title_favorites">Favorites</string>
+    <string name="title_pantry">Pantry</string>
+    <string name="title_search">Search</string>
 </resources>

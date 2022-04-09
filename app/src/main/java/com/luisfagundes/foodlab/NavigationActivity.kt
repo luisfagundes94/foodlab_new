@@ -33,6 +33,7 @@ class NavigationActivity : AppCompatActivity() {
         val appBarConfiguration = AppBarConfiguration(
             setOf(
                 com.luisfagundes.feature_home.R.id.navigation_home,
+                com.luisfagundes.feature_search.R.id.navigation_search,
                 com.luisfagundes.feature_favorites.R.id.navigation_favorites,
                 com.luisfagundes.feature_pantry.R.id.navigation_pantry
             )
