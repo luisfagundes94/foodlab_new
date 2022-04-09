@@ -3,13 +3,16 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/AndroidProjects/foodlab/app/src/main/res/layout-night/activity_navigation.xml" value="0.4" />
         <entry key="..\:/AndroidProjects/foodlab/app/src/main/res/layout/activity_main.xml" value="0.19635416666666666" />
-        <entry key="..\:/AndroidProjects/foodlab/app/src/main/res/layout/activity_navigation.xml" value="0.4" />
+        <entry key="..\:/AndroidProjects/foodlab/app/src/main/res/layout/activity_navigation.xml" value="0.2953125" />
         <entry key="..\:/AndroidProjects/foodlab/app/src/main/res/menu/bottom_nav.xml" value="0.4" />
         <entry key="..\:/AndroidProjects/foodlab/app/src/main/res/menu/bottom_nav_items.xml" value="0.4" />
         <entry key="..\:/AndroidProjects/foodlab/feature-favorites/src/main/res/layout/fragment_favorites.xml" value="0.4" />
         <entry key="..\:/AndroidProjects/foodlab/feature-home/src/main/res/layout/fragment_home.xml" value="0.4" />
         <entry key="..\:/AndroidProjects/foodlab/feature-pantry/src/main/res/layout/fragment_home.xml" value="0.4" />
+        <entry key="..\:/AndroidProjects/foodlab/feature-recipe/src/main/res/layout/fragment_recipe_details.xml" value="0.4" />
+        <entry key="..\:/AndroidProjects/foodlab/feature-recipe/src/main/res/layout/fragment_recipe_list.xml" value="0.4" />
         <entry key="..\:/AndroidProjects/foodlab/feature-search/src/main/res/layout/fragment_search.xml" value="0.21041666666666667" />
       </map>
     </option>
@@ -19,5 +22,12 @@
   </component>
   <component name="ProjectType">
     <option name="id" value="Android" />
+  </component>
+  <component name="SuppressABINotification">
+    <option name="modulesWithSuppressedNotConfigured">
+      <set>
+        <option value="foodlab.feature-recipe" />
+      </set>
+    </option>
   </component>
 </project>

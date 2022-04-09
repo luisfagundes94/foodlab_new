@@ -19,8 +19,8 @@
             <option value="$PROJECT_DIR$/domain" />
             <option value="$PROJECT_DIR$/extensions" />
             <option value="$PROJECT_DIR$/feature-favorites" />
-            <option value="$PROJECT_DIR$/feature-home" />
             <option value="$PROJECT_DIR$/feature-pantry" />
+            <option value="$PROJECT_DIR$/feature-recipe" />
             <option value="$PROJECT_DIR$/feature-search" />
           </set>
         </option>
