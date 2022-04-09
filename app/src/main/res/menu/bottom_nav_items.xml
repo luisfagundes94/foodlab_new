@@ -1,17 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
         android:id="@+id/navigation_home"
         android:icon="@drawable/ic_baseline_home_24"
-        android:title="@string/tv_home" />
+        android:title="@string/title_home" />
+    <item
+        android:id="@+id/navigation_search"
+        android:icon="@drawable/ic_baseline_search_24"
+        android:title="@string/title_search" />
     <item
         android:id="@+id/navigation_favorites"
         android:icon="@drawable/ic_baseline_favorite_24"
-        android:title="@string/tv_favorites" />
+        android:title="@string/title_favorites" />
     <item
         android:id="@+id/navigation_pantry"
         android:icon="@drawable/ic_baseline_storage_24"
-        android:title="@string/tv_pantry" />
+        android:title="@string/title_pantry" />
+
 </menu>

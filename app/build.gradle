@@ -35,6 +35,8 @@ sourceSets {
 dependencies {
     // Modules
     implementation project(':feature-home')
+    implementation project(':feature-search')
     implementation project(':feature-pantry')
     implementation project(':feature-favorites')
+
 }

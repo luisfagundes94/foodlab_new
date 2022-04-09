@@ -11,6 +11,7 @@
       <module name="foodlab.feature-favorites" target="11" />
       <module name="foodlab.feature-home" target="11" />
       <module name="foodlab.feature-pantry" target="11" />
+      <module name="foodlab.feature-search" target="11" />
     </bytecodeTargetLevel>
   </component>
 </project>
