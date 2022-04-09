@@ -28,7 +28,9 @@ class NavigationActivity : AppCompatActivity() {
 
     private fun setupBottomNavigation() {
         val bottomNavView = binding.bottomNavItems
-        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment_container) as NavHostFragment
+        val navHostFragment = supportFragmentManager.findFragmentById(
+            R.id.nav_host_fragment_container
+        ) as NavHostFragment
         val navController = navHostFragment.navController
         val appBarConfiguration = AppBarConfiguration(
             setOf(
@@ -39,7 +41,7 @@ class NavigationActivity : AppCompatActivity() {
             )
         )
 
-        //setupImmersiveView(navController, bottomNavView)
+        setupImmersiveView(navController, bottomNavView)
 
         setupActionBarWithNavController(navController, appBarConfiguration)
         bottomNavView.setupWithNavController(navController)
