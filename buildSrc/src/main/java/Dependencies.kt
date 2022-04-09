@@ -17,8 +17,9 @@ object Dependencies {
 
     object Data {
         const val retrofit = "com.squareup.retrofit2:retrofit:${Versions.retrofit}"
-        const val gson = "com.squareup.retrofit2:converter-gson:${Versions.retrofit}"
-        const val okHttp = "com.squareup.okhttp3:logging-interceptor:${Versions.okHttp}"
+        const val retrofitGson = "com.squareup.retrofit2:converter-gson:${Versions.retrofit}"
+        const val okHttpLogging = "com.squareup.okhttp3:logging-interceptor:${Versions.okHttp}"
+        const val okHttp = "com.squareup.okhttp3:${Versions.okHttp}"
         const val preferencesKtx = "androidx.preference:preference-ktx:${Versions.preferencesKtx}"
         const val roomRuntime = "androidx.room:room-runtime:${Versions.room}"
         const val roomKtx = "androidx.room:room-ktx:${Versions.room}"

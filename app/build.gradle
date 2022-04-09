@@ -1,9 +1,11 @@
+import com.luisfagundes.buildSrc.Dependencies
 import com.luisfagundes.buildSrc.Versions
 
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
     id 'androidx.navigation.safeargs.kotlin'
+    id 'dagger.hilt.android.plugin'
 }
 
 apply from: "$rootDir/base_dependencies.gradle"
@@ -34,7 +36,8 @@ sourceSets {
 
 dependencies {
     // Modules
-    implementation project(':feature-home')
+    implementation project(':feature-recipe')
+    implementation project(':feature-search')
     implementation project(':feature-pantry')
     implementation project(':feature-favorites')
 }
