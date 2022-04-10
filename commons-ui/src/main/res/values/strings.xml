@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="generic_error_message">Oops, something went wrong. Please try again…</string>
+    <string name="generic_error_button_message">Try Again</string>
+</resources>

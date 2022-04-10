@@ -37,6 +37,11 @@ android {
 
 dependencies {
 
+    // Core
+    implementation(project(":core"))
+    implementation(project(":domain"))
+    implementation(project(":extensions"))
+
     // Data
     implementation(Dependencies.Data.retrofit)
     implementation(Dependencies.Data.retrofitGson)
@@ -45,8 +50,8 @@ dependencies {
     implementation(Dependencies.Data.loggingInterceptor)
 
     // DI
-    implementation(Dependencies.DI.daggerHilt)
-    implementation(Dependencies.DI.daggerHiltCompiler)
+    implementation(Dependencies.DI.koin)
+    implementation(Dependencies.DI.koinCore)
 }
 
 fun getApiKey() = apiKeyProperties["API_KEY"]

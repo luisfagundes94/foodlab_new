@@ -1,5 +1,5 @@
-import com.luisfagundes.buildSrc.Versions
 import com.luisfagundes.buildSrc.Dependencies
+import com.luisfagundes.buildSrc.Versions
 
 plugins {
     id("com.android.library")
@@ -23,6 +23,7 @@ dependencies {
 
     // Modules
     implementation(project(":domain"))
+    implementation(project(":data"))
 
     // UI
     implementation(Dependencies.UI.shimmerEffect)

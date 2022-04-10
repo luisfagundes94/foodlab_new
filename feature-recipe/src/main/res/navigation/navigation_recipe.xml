@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/recipeListFragment"
-        android:name="com.luisfagundes.feature_recipe.list.presentation.RecipeListFragment"
+        android:name="com.luisfagundes.feature_recipe.presentation.list.RecipeListFragment"
         android:label="@string/label_home">
         <action
             android:id="@+id/action_homeFragment_to_recipeDetailsFragment"
@@ -14,6 +14,6 @@
     </fragment>
     <fragment
         android:id="@+id/recipeDetailsFragment"
-        android:name="com.luisfagundes.feature_recipe.details.presentation.RecipeDetailsFragment"
+        android:name="com.luisfagundes.feature_recipe.presentation.details.RecipeDetailsFragment"
         android:label="@string/label_recipe_details" />
 </navigation>

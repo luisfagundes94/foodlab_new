@@ -5,7 +5,7 @@ import retrofit2.http.GET
 import retrofit2.http.QueryMap
 
 interface ApiService {
-    @GET("recipes/random")
+    @GET("recipes/complexSearch")
     suspend fun fetchRecipes(
         @QueryMap
         queries: Map<String, String>

@@ -43,8 +43,7 @@ dependencies {
     implementation project(':core')
     implementation project(':base')
     implementation project(':extensions')
-    implementation project(':domain')
-    implementation project(':data')
+    implementation project(':commons-ui')
 
     // Core
     implementation Dependencies.Core.kotlinStdlib
@@ -57,8 +56,8 @@ dependencies {
     implementation Dependencies.Core.material
 
     // DI
-    implementation Dependencies.DI.daggerHilt
-    implementation Dependencies.DI.daggerHiltCompiler
+    implementation Dependencies.DI.koinCore
+    implementation Dependencies.DI.koin
 
     // Testing
     testImplementation Dependencies.Test.mockk

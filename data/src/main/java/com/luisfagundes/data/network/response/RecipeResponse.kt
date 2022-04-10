@@ -9,6 +9,7 @@ data class RecipeResponse(
     val sourceUrl: String,
     val aggregateLikes: Int,
     val spoonacularScore: Int,
+    val sourceName: String?,
     val healthScore: Int,
     val cheap: Boolean,
     val vegetarian: Boolean,

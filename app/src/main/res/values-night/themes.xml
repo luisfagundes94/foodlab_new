@@ -3,6 +3,7 @@
     <style name="Theme.Foodlab" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/blaze_orange</item>
+        <item name="colorAccent">@color/blaze_orange</item>
         <item name="colorPrimaryVariant">@color/black</item>
         <item name="colorOnPrimary">@color/black</item>
         <!-- Secondary brand color. -->
@@ -12,5 +13,7 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+        <item name="android:fontFamily">@font/neometric_regular</item>
+        <item name="fontFamily">@font/neometric_regular</item>
     </style>
 </resources>

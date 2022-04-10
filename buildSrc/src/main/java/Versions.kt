@@ -41,7 +41,7 @@ object Versions {
 
     // DI
     const val koin = "3.1.4"
-    const val daggerHilt = "2.39.1"
+    const val daggerHilt = "2.41"
 
     // Test
     const val junit = "4.13.1"
