@@ -5,6 +5,7 @@
       <module name="foodlab.app" target="11" />
       <module name="foodlab.base" target="11" />
       <module name="foodlab.buildSrc" target="11" />
+      <module name="foodlab.commons-ui" target="11" />
       <module name="foodlab.data" target="11" />
       <module name="foodlab.domain" target="11" />
       <module name="foodlab.extensions" target="11" />

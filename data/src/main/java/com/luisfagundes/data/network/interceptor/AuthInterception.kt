@@ -12,6 +12,7 @@ class AuthInterception(
         val newUrl = requestUrl.newBuilder()
             .addQueryParameter(API_KEY, apiKey)
             .addQueryParameter(LIMIT_LICENSE, true.toString())
+            .addQueryParameter(NUMBER_OF_RESULTS, 20.toString())
             .build()
 
         return chain.proceed(
@@ -24,5 +25,6 @@ class AuthInterception(
     private companion object {
         const val API_KEY = "apiKey"
         const val LIMIT_LICENSE = "limitLicense"
+        const val NUMBER_OF_RESULTS = "number"
     }
 }

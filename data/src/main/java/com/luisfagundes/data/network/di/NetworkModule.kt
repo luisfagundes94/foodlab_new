@@ -1,57 +1,67 @@
 package com.luisfagundes.data.network.di
 
 import com.luisfagundes.data.BuildConfig
+import com.luisfagundes.data.network.ApiService
 import com.luisfagundes.data.network.interceptor.AuthInterception
-import dagger.Module
-import dagger.Provides
-import dagger.hilt.InstallIn
-import dagger.hilt.components.SingletonComponent
+import com.luisfagundes.data.network.repository.RecipeRepositoryImpl
+import com.luisfagundes.domain.repository.RecipeRepository
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
+import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
 private const val TIME_OUT = 15L
 
-@Module
-@InstallIn(SingletonComponent::class)
-object NetworkModule {
+@Suppress("RemoveExplicitTypeArguments", "USELESS_CAST")
+val networkModule = module {
 
-    @Provides
-    fun provideRetrofit(
-        okHttpClient: OkHttpClient,
-        converterFactory: GsonConverterFactory
-    ) = Retrofit.Builder()
-        .baseUrl(BuildConfig.BASE_URL)
-        .client(okHttpClient)
-        .addConverterFactory(converterFactory)
-        .build()
+    single { RecipeRepositoryImpl(get()) as RecipeRepository }
 
-    @Provides
-    fun provideOkHttpClient(
-        loggingInterceptor: HttpLoggingInterceptor,
-        authInterception: AuthInterception
-    ) = OkHttpClient.Builder()
-        .addInterceptor(loggingInterceptor)
+    single { createApiService(get()) }
+
+    single { createRetrofit(get(), get()) }
+
+    single { createHttpClient(get(), get()) }
+
+    single { createAuthInterceptor() }
+
+    single { createHttpInterceptor() }
+
+    single { GsonConverterFactory.create() }
+}
+
+private fun createApiService(retrofit: Retrofit): ApiService =
+    retrofit.create(ApiService::class.java)
+
+private fun createRetrofit(
+    okHttpClient: OkHttpClient,
+    converterFactory: GsonConverterFactory
+) = Retrofit.Builder()
+    .baseUrl(BuildConfig.BASE_URL)
+    .client(okHttpClient)
+    .addConverterFactory(converterFactory)
+    .build()
+
+private fun createHttpClient(
+    authInterception: AuthInterception,
+    httpLoggingInterceptor: HttpLoggingInterceptor
+) =
+    OkHttpClient.Builder()
         .addInterceptor(authInterception)
+        .addInterceptor(httpLoggingInterceptor)
         .readTimeout(TIME_OUT, TimeUnit.SECONDS)
         .connectTimeout(TIME_OUT, TimeUnit.SECONDS)
         .build()
 
-    @Provides
-    fun provideOkHttpLoggingInterceptor() = HttpLoggingInterceptor().apply {
-        setLevel(
-            when {
-                BuildConfig.DEBUG -> HttpLoggingInterceptor.Level.BODY
-                else -> HttpLoggingInterceptor.Level.NONE
-            }
-        )
-    }
+private fun createAuthInterceptor() = AuthInterception(apiKey = BuildConfig.API_KEY)
 
-    @Provides
-    fun provideAuthInterceptor() = AuthInterception(apiKey = BuildConfig.API_KEY)
-
-    @Provides
-    fun provideGsonConverterFactory() = GsonConverterFactory.create()
+private fun createHttpInterceptor() = HttpLoggingInterceptor().apply {
+    setLevel(
+        when {
+            BuildConfig.DEBUG -> HttpLoggingInterceptor.Level.BODY
+            else -> HttpLoggingInterceptor.Level.NONE
+        }
+    )
 }

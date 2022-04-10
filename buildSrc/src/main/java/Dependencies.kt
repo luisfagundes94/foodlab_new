@@ -19,7 +19,7 @@ object Dependencies {
         const val retrofit = "com.squareup.retrofit2:retrofit:${Versions.retrofit}"
         const val retrofitGson = "com.squareup.retrofit2:converter-gson:${Versions.retrofit}"
         const val okHttpLogging = "com.squareup.okhttp3:logging-interceptor:${Versions.okHttp}"
-        const val okHttp = "com.squareup.okhttp3:${Versions.okHttp}"
+        const val okHttp = "com.squareup.okhttp3:okhttp:${Versions.okHttp}"
         const val preferencesKtx = "androidx.preference:preference-ktx:${Versions.preferencesKtx}"
         const val roomRuntime = "androidx.room:room-runtime:${Versions.room}"
         const val roomKtx = "androidx.room:room-ktx:${Versions.room}"
@@ -40,6 +40,7 @@ object Dependencies {
     object DI {
         const val koin = "io.insert-koin:koin-android:${Versions.koin}"
         const val koinCore = "io.insert-koin:koin-core:${Versions.koin}"
+        const val daggerHiltViewModel = "androidx.hilt:hilt-lifecycle-viewmodel:${Versions.daggerHilt}"
         const val daggerHilt = "com.google.dagger:hilt-android:${Versions.daggerHilt}"
         const val daggerHiltCompiler = "com.google.dagger:hilt-android-compiler:${Versions.daggerHilt}"
     }

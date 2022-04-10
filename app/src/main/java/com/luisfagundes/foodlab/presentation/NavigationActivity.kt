@@ -8,9 +8,7 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import com.luisfagundes.foodlab.R
 import com.luisfagundes.foodlab.databinding.ActivityNavigationBinding
-import dagger.hilt.android.AndroidEntryPoint
 
-@AndroidEntryPoint
 class NavigationActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityNavigationBinding

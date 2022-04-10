@@ -21,9 +21,6 @@ android {
 
 dependencies {
 
-    // Modules
-    implementation(project(":domain"))
-
     // UI
     implementation(Dependencies.UI.shimmerEffect)
     implementation(Dependencies.UI.picasso)
