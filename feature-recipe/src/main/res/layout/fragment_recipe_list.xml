@@ -21,6 +21,8 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:visibility="gone"
+        android:layout_marginStart="@dimen/default_margin"
+        android:layout_marginEnd="@dimen/default_margin"
         tools:visibility="visible">
 
         <androidx.recyclerview.widget.RecyclerView

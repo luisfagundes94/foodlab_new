@@ -6,7 +6,7 @@ data class RecipeResponse(
     val image: String,
     val servings: Int,
     val readyInMinutes: Int,
-    val sourceUrl: String,
+    val sourceUrl: String?,
     val aggregateLikes: Int,
     val spoonacularScore: Int,
     val sourceName: String?,
@@ -14,6 +14,6 @@ data class RecipeResponse(
     val cheap: Boolean,
     val vegetarian: Boolean,
     val vegan: Boolean,
-    val dishTypes: List<String>,
+    val dishTypes: List<String>?,
     val summary: String
 )
