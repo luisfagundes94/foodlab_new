@@ -72,10 +72,10 @@ class RecipeDetailsFragment : BaseFragment<FragmentRecipeDetailsBinding>(
 
     private fun showRecipeDetails(recipe: Recipe) = with(binding) {
         imgRecipe.load(recipe.image)
-        tvRecipeTitle.text = recipe.title
-        tvRecipeDescription.text = HtmlCompat.fromHtml(recipe.summary, HtmlCompat.FROM_HTML_MODE_LEGACY)
-        tvRecipeDescription.movementMethod = LinkMovementMethod.getInstance()
-        tvDuration.text = "${recipe.readyInMinutes} min"
+        tvTitle.text = recipe.title
+        tvDescription.text = HtmlCompat.fromHtml(recipe.summary, HtmlCompat.FROM_HTML_MODE_LEGACY)
+        tvDescription.movementMethod = LinkMovementMethod.getInstance()
+        tvReadyInMinutes.text = "${recipe.readyInMinutes} min"
         tvServe.text = "${recipe.servings} serve"
         tvIngredientsSize.text = "${recipe.ingredients.count()} items"
         ingredientAdapter.updateIngredients(recipe.ingredients)

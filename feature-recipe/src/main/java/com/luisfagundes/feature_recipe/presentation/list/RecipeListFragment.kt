@@ -4,6 +4,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.luisfagundes.base.BaseFragment
 import com.luisfagundes.domain.model.Recipe
+import com.luisfagundes.extensions.navigateWithDirections
 import com.luisfagundes.feature_recipe.R
 import com.luisfagundes.feature_recipe.databinding.FragmentRecipeListBinding
 import com.luisfagundes.feature_recipe.model.RecipesUiState
@@ -66,9 +67,9 @@ class RecipeListFragment : BaseFragment<FragmentRecipeListBinding>(
     }
 
     private fun navigateToRecipeDetails(recipeId: Int) {
-        val action = RecipeListFragmentDirections.actionHomeFragmentToRecipeDetailsFragment(
+        val action = RecipeListFragmentDirections.actionToRecipeDetailsFragment(
             recipeId = recipeId
         )
-        findNavController().navigate(action)
+        findNavController().navigateWithDirections(action)
     }
 }
