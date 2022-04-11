@@ -17,4 +17,7 @@
     <color name="dark_orange">#c43a00</color>
     <color name="grenadier">#C43A00</color>
     <color name="transparent_black">#99000000</color>
+    <color name="light_gray">#C3C3C3</color>
+    <color name="dark_gray">#858585</color>
+    <color name="dusk_yellow">#ffc922</color>
 </resources>

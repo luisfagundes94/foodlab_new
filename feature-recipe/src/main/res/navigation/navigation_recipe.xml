@@ -12,8 +12,14 @@
             android:id="@+id/action_homeFragment_to_recipeDetailsFragment"
             app:destination="@id/recipeDetailsFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/recipeDetailsFragment"
         android:name="com.luisfagundes.feature_recipe.presentation.details.RecipeDetailsFragment"
-        android:label="@string/label_recipe_details" />
+        android:label="@string/label_recipe_details">
+
+        <argument
+            android:name="recipeId"
+            app:argType="integer" />
+    </fragment>
 </navigation>

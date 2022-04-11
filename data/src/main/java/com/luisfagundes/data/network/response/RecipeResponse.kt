@@ -12,6 +12,7 @@ data class RecipeResponse(
     val sourceName: String?,
     val healthScore: Int,
     val cheap: Boolean,
+    val extendedIngredients: List<IngredientResponse>?,
     val vegetarian: Boolean,
     val vegan: Boolean,
     val dishTypes: List<String>?,

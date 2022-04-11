@@ -1,11 +1,139 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="details" />
-</androidx.appcompat.widget.LinearLayoutCompat>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <include
+            android:id="@+id/recipe_details_loading_container"
+            layout="@layout/layout_generic_loading"
+            android:visibility="visible" />
+
+        <include
+            android:id="@+id/recipe_details_error_container"
+            layout="@layout/layout_generic_error"
+            android:visibility="gone" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/recipe_details_success_container"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_margin="@dimen/default_margin"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:visibility="visible">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/imgRecipeContainer"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                app:cardCornerRadius="@dimen/cardview_default_radius"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/img_recipe"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    tools:background="@tools:sample/backgrounds/scenic" />
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:id="@+id/tv_recipe_title"
+                style="@style/Title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imgRecipeContainer"
+                tools:text="Banana com Aveia" />
+
+            <TextView
+                android:id="@+id/tv_recipe_description"
+                style="@style/Title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_recipe_title"
+                tools:text="Banana tradicional brasileira misturada com flocos de aveia" />
+
+            <LinearLayout
+                android:id="@+id/linearLayout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:gravity="center"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="@+id/tv_recipe_description"
+                app:layout_constraintStart_toStartOf="@+id/tv_recipe_description"
+                app:layout_constraintTop_toBottomOf="@+id/tv_recipe_description">
+
+                <TextView
+                    android:id="@+id/tv_duration"
+                    style="@style/Title"
+                    android:layout_width="wrap_content"
+                    android:layout_marginEnd="32dp"
+                    android:layout_weight="0"
+                    app:drawableLeftCompat="@drawable/ic_baseline_access_time_24"
+                    tools:text="4 min" />
+
+                <TextView
+                    android:id="@+id/tv_serve"
+                    style="@style/Title"
+                    android:layout_width="wrap_content"
+                    android:layout_weight="0"
+                    app:drawableLeftCompat="@drawable/ic_baseline_people_24"
+                    tools:text="1 serve" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_title_ingredients"
+                style="@style/Title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:text="@string/ingredients"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
+            <TextView
+                android:id="@+id/tv_ingredients_size"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="end"
+                android:text="TextView"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_title_ingredients"
+                app:layout_constraintEnd_toEndOf="@+id/linearLayout"
+                app:layout_constraintStart_toEndOf="@+id/tv_title_ingredients"
+                app:layout_constraintTop_toTopOf="@+id/tv_title_ingredients" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_ingredients"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:nestedScrollingEnabled="false"
+                app:layout_constraintEnd_toEndOf="@+id/tv_ingredients_size"
+                app:layout_constraintStart_toStartOf="@+id/tv_title_ingredients"
+                app:layout_constraintTop_toBottomOf="@+id/tv_title_ingredients"
+                tools:itemCount="5"
+                tools:listitem="@layout/layout_ingredient_item" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

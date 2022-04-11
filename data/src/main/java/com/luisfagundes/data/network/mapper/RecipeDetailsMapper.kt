@@ -13,35 +13,34 @@ import com.luisfagundes.extensions.empty
 
 private const val BASE_IMAGE_URL = "https://spoonacular.com/cdn/ingredients_100x100/"
 
-object RecipeMapper {
-    fun Response<List<RecipeResponse>>.mapToDomain(): Response<List<Recipe>> {
+object RecipeDetailsMapper {
+    fun Response<RecipeResponse>.mapToDomain(): Response<Recipe> {
         return when (this) {
-            is Response.Success -> mapToDomain()
+            is Response.Success -> toDomain()
             is Response.Error -> Response.Error(exception)
         }
     }
 
-    private fun Response.Success<List<RecipeResponse>>.mapToDomain() =
-        Response.Success(this.data.map { it.toDomain() })
-
-    private fun RecipeResponse.toDomain() =
-        Recipe(
-            id = this.id,
-            title = this.title,
-            image = this.image,
-            servings = this.servings,
-            readyInMinutes = this.readyInMinutes,
-            sourceUrl = this.sourceUrl,
-            aggregateLikes = this.aggregateLikes,
-            spoonacularScore = this.spoonacularScore,
-            healthScore = this.healthScore,
-            cheap = this.cheap,
-            vegetarian = this.vegetarian,
-            vegan = this.vegan,
-            dishTypes = this.dishTypes ?: emptyList(),
-            summary = this.summary,
-            sourceName = this.sourceName ?: String.empty(),
-            ingredients = this.extendedIngredients?.mapToDomain() ?: emptyList()
+    private fun Response.Success<RecipeResponse>.toDomain() =
+        Response.Success(
+            Recipe(
+                id = this.data.id,
+                title = this.data.title,
+                image = this.data.image,
+                servings = this.data.servings,
+                readyInMinutes = this.data.readyInMinutes,
+                sourceUrl = this.data.sourceUrl,
+                aggregateLikes = this.data.aggregateLikes,
+                spoonacularScore = this.data.spoonacularScore,
+                healthScore = this.data.healthScore,
+                cheap = this.data.cheap,
+                vegetarian = this.data.vegetarian,
+                vegan = this.data.vegan,
+                dishTypes = this.data.dishTypes ?: emptyList(),
+                summary = this.data.summary,
+                sourceName = this.data.sourceName ?: String.empty(),
+                ingredients = this.data.extendedIngredients?.mapToDomain() ?: emptyList()
+            )
         )
 
     private fun List<IngredientResponse>.mapToDomain(): List<Ingredient> {
