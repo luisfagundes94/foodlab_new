@@ -1,6 +1,7 @@
 package com.luisfagundes.feature_recipe.di
 
 import com.luisfagundes.feature_recipe.presentation.details.IngredientListAdapter
+import com.luisfagundes.feature_recipe.presentation.details.RecipeDetailsViewModel
 import com.luisfagundes.feature_recipe.presentation.list.RecipeListAdapter
 import com.luisfagundes.feature_recipe.presentation.list.RecipeListViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -15,4 +16,5 @@ val recipeModule = module {
     factory { IngredientListAdapter() }
 
     viewModel { RecipeListViewModel(get()) }
+    viewModel { RecipeDetailsViewModel(get()) }
 }
