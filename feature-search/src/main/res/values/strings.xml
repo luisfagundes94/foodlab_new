@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="label_search">Search</string>
+    <string name="cuisines">Cuisines</string>
+    <string name="include_ingredients">Include Ingredients</string>
+    <string name="results">Results</string>
+    <string name="search_recipe_hint">Search recipe…</string>
+    <string name="search_recipe">Search Recipes</string>
 </resources>

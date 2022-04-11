@@ -4,6 +4,7 @@ import android.app.Application
 import com.luisfagundes.data.network.di.networkModule
 import com.luisfagundes.domain.di.domainModule
 import com.luisfagundes.feature_recipe.di.recipeModule
+import com.luisfagundes.feature_search.di.searchModule
 import org.koin.core.context.startKoin
 import timber.log.Timber
 
@@ -25,7 +26,8 @@ class Application : Application() {
             modules(
                 recipeModule,
                 networkModule,
-                domainModule
+                domainModule,
+                searchModule
             )
         }
     }

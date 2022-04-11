@@ -30,7 +30,7 @@ object RecipeMapper {
             cheap = this.cheap,
             vegetarian = this.vegetarian,
             vegan = this.vegan,
-            dishTypes = this.dishTypes,
+            dishTypes = this.dishTypes ?: emptyList(),
             summary = this.summary,
             sourceName = this.sourceName ?: String.empty()
         )

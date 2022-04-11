@@ -10,7 +10,7 @@
         android:id="@+id/recipeImgContainer"
         android:layout_width="0dp"
         android:layout_height="@dimen/recipe_image_height"
-        android:layout_margin="@dimen/default_margin"
+        android:layout_marginTop="@dimen/default_margin"
         app:cardCornerRadius="@dimen/recipe_image_round_corner_size"
         app:cardElevation="@dimen/recipe_image_elevation"
         app:layout_constraintEnd_toEndOf="parent"
@@ -25,11 +25,11 @@
                 android:id="@+id/imgRecipe"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                tools:background="@drawable/piamontese"
                 android:contentDescription="@string/recipe_image_description"
                 android:foreground="@color/transparent_black"
                 android:foregroundTintMode="multiply"
-                android:scaleType="centerCrop" />
+                android:scaleType="centerCrop"
+                tools:background="@drawable/piamontese" />
 
             <TextView
                 android:id="@+id/tvReadyInMinutes"
@@ -38,23 +38,23 @@
                 android:layout_margin="@dimen/default_margin"
                 android:drawablePadding="@dimen/super_small_margin"
                 android:gravity="center"
-                tools:text="15 min"
                 android:textColor="@color/white"
                 app:drawableLeftCompat="@drawable/ic_baseline_access_time_24"
                 app:layout_constraintBottom_toBottomOf="@+id/imgRecipe"
                 app:layout_constraintStart_toStartOf="parent"
-                tools:drawableLeft="@drawable/ic_baseline_access_time_24" />
+                tools:drawableLeft="@drawable/ic_baseline_access_time_24"
+                tools:text="15 min" />
 
             <TextView
                 android:id="@+id/tvTitle"
                 style="@style/Title"
                 android:layout_width="0dp"
                 android:layout_marginBottom="@dimen/super_small_margin"
-                tools:text="Arroz a Piamontese"
                 android:textColor="@color/white"
                 app:layout_constraintBottom_toTopOf="@+id/tvReadyInMinutes"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/tvReadyInMinutes" />
+                app:layout_constraintStart_toStartOf="@+id/tvReadyInMinutes"
+                tools:text="Arroz a Piamontese" />
 
             <TextView
                 android:id="@+id/tvRecipeOwner"

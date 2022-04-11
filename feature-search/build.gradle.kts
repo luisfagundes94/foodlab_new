@@ -23,6 +23,7 @@ dependencies {
 
     // Modules
     implementation(project(":domain"))
+    implementation(project(":feature-recipe"))
 
     // UI
     implementation(Dependencies.UI.shimmerEffect)
