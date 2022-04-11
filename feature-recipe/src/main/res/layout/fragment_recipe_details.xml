@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -24,9 +24,8 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/recipe_details_success_container"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:layout_margin="@dimen/default_margin"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -36,12 +35,13 @@
                 android:id="@+id/imgRecipeContainer"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
-                app:cardCornerRadius="@dimen/cardview_default_radius"
+                app:cardCornerRadius="@dimen/recipe_image_round_corner_size"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
                 <ImageView
+                    android:contentDescription="@string/recipe_image_description"
                     android:id="@+id/imgRecipe"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -54,7 +54,7 @@
                 style="@style/Title"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="@dimen/default_margin"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/imgRecipeContainer"
@@ -62,7 +62,7 @@
 
             <TextView
                 android:id="@+id/tvDescription"
-                style="@style/Title"
+                style="@style/SubTitle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
@@ -76,7 +76,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:gravity="center"
+                android:gravity="start"
                 android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="@+id/tvDescription"
                 app:layout_constraintStart_toStartOf="@+id/tvDescription"
@@ -84,7 +84,7 @@
 
                 <TextView
                     android:id="@+id/tvReadyInMinutes"
-                    style="@style/Title"
+                    style="@style/SubTitle"
                     android:layout_width="wrap_content"
                     android:layout_marginEnd="32dp"
                     android:layout_weight="0"
@@ -93,7 +93,7 @@
 
                 <TextView
                     android:id="@+id/tvServe"
-                    style="@style/Title"
+                    style="@style/SubTitle"
                     android:layout_width="wrap_content"
                     android:layout_weight="0"
                     app:drawableLeftCompat="@drawable/ic_baseline_people_24"
@@ -115,18 +115,20 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:gravity="end"
-                android:text="TextView"
                 app:layout_constraintBottom_toBottomOf="@+id/tvTitleIngredients"
                 app:layout_constraintEnd_toEndOf="@+id/linearLayout"
                 app:layout_constraintStart_toEndOf="@+id/tvTitleIngredients"
-                app:layout_constraintTop_toTopOf="@+id/tvTitleIngredients" />
+                app:layout_constraintTop_toTopOf="@+id/tvTitleIngredients"
+                tools:text="6 items" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvIngredients"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="@dimen/default_margin"
+                android:clipToPadding="false"
                 android:nestedScrollingEnabled="false"
+                android:paddingBottom="@dimen/default_margin"
                 app:layout_constraintEnd_toEndOf="@+id/tvIngredientsSize"
                 app:layout_constraintStart_toStartOf="@+id/tvTitleIngredients"
                 app:layout_constraintTop_toBottomOf="@+id/tvTitleIngredients"
@@ -136,4 +138,4 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-</ScrollView>
+</androidx.core.widget.NestedScrollView>

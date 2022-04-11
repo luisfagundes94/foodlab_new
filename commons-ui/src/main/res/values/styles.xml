@@ -7,6 +7,11 @@
         <item name="android:gravity">start</item>
     </style>
 
+    <style name="SubTitle" parent="Title">
+        <item name="android:textSize">@dimen/sub_title_size</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
     <style name="RatingBar" parent="Theme.AppCompat">
         <item name="colorControlNormal">@color/light_gray</item>
         <item name="colorControlActivated">@color/dusk_yellow</item>

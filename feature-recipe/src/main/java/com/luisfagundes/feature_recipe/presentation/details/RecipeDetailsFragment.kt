@@ -2,13 +2,11 @@ package com.luisfagundes.feature_recipe.presentation.details
 
 import android.text.method.LinkMovementMethod
 import androidx.core.text.HtmlCompat
-import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.luisfagundes.base.BaseFragment
 import com.luisfagundes.domain.model.Recipe
 import com.luisfagundes.extensions.load
-import com.luisfagundes.extensions.showVisibility
 import com.luisfagundes.feature_recipe.R
 import com.luisfagundes.feature_recipe.databinding.FragmentRecipeDetailsBinding
 import com.luisfagundes.feature_recipe.model.RecipeDetailsState
@@ -71,14 +69,25 @@ class RecipeDetailsFragment : BaseFragment<FragmentRecipeDetailsBinding>(
     }
 
     private fun showRecipeDetails(recipe: Recipe) = with(binding) {
+        super.showSuccess()
+
         imgRecipe.load(recipe.image)
         tvTitle.text = recipe.title
         tvDescription.text = HtmlCompat.fromHtml(recipe.summary, HtmlCompat.FROM_HTML_MODE_LEGACY)
         tvDescription.movementMethod = LinkMovementMethod.getInstance()
-        tvReadyInMinutes.text = "${recipe.readyInMinutes} min"
-        tvServe.text = "${recipe.servings} serve"
-        tvIngredientsSize.text = "${recipe.ingredients.count()} items"
+        tvReadyInMinutes.text = getReadyInMinutesFormattedText(recipe)
+        tvServe.text = getServeFormattedText(recipe)
+        tvIngredientsSize.text = getIngredientCountFormattedText(recipe)
         ingredientAdapter.updateIngredients(recipe.ingredients)
     }
+
+    private fun getReadyInMinutesFormattedText(recipe: Recipe) =
+        "${recipe.readyInMinutes} ${getString(R.string.minutes)}"
+
+    private fun getServeFormattedText(recipe: Recipe) =
+        "${recipe.servings} ${getString(R.string.servings)}"
+
+    private fun getIngredientCountFormattedText(recipe: Recipe) =
+        "${recipe.ingredients.count()} ${getString(R.string.items)}"
 
 }
