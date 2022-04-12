@@ -62,10 +62,10 @@
 
             <TextView
                 android:id="@+id/tvDescription"
-                style="@style/SubTitle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/default_margin"
+                android:gravity="start"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tvTitle"
@@ -84,27 +84,27 @@
 
                 <TextView
                     android:id="@+id/tvReadyInMinutes"
-                    style="@style/SubTitle"
                     android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_marginEnd="32dp"
-                    android:layout_weight="0"
-                    android:paddingLeft="@dimen/super_small_margin"
+                    android:drawablePadding="@dimen/super_small_margin"
+                    android:gravity="center"
                     app:drawableLeftCompat="@drawable/ic_baseline_access_time_24"
                     tools:text="4 min" />
 
                 <TextView
                     android:id="@+id/tvServe"
-                    style="@style/SubTitle"
                     android:layout_width="wrap_content"
-                    android:layout_weight="0"
-                    android:paddingLeft="@dimen/super_small_margin"
+                    android:layout_height="wrap_content"
+                    android:drawablePadding="@dimen/super_small_margin"
+                    android:gravity="center"
                     app:drawableLeftCompat="@drawable/ic_baseline_people_24"
                     tools:text="2 servings" />
             </LinearLayout>
 
             <TextView
                 android:id="@+id/tvTitleIngredients"
-                style="@style/Title"
+                style="@style/SubTitle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/default_margin"
