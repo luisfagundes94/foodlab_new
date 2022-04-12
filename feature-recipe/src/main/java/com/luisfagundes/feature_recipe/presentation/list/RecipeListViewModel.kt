@@ -24,6 +24,7 @@ class RecipeListViewModel(
         queryParams["addRecipeInformation"] = true.toString()
         queryParams["sort"] = "popularity"
 
+        _recipesUiState.postValue(RecipesUiState.Loading)
         executeCoroutines(dispatcher) {
             getRecipes.invoke(queryParams).fold(
                 ::onGetRecipesSuccess, ::onGetRecipesError

@@ -4,4 +4,5 @@
     <dimen name="recipe_image_round_corner_size">15dp</dimen>
     <dimen name="recipe_image_elevation">5dp</dimen>
     <dimen name="recipe_image_alpha">0.40</dimen>
+    <dimen name="recipe_image_detail_height">200dp</dimen>
 </resources>

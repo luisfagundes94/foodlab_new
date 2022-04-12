@@ -1,13 +1,16 @@
 package com.luisfagundes.feature_recipe.presentation.list
 
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.luisfagundes.base.BaseFragment
 import com.luisfagundes.domain.model.Recipe
+import com.luisfagundes.extensions.navigateWithDirections
 import com.luisfagundes.feature_recipe.R
 import com.luisfagundes.feature_recipe.databinding.FragmentRecipeListBinding
 import com.luisfagundes.feature_recipe.model.RecipesUiState
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.android.ext.android.inject
+import org.koin.core.parameter.parametersOf
 
 class RecipeListFragment : BaseFragment<FragmentRecipeListBinding>(
     loadingViewId = R.id.recipe_list_loading_container,
@@ -16,7 +19,9 @@ class RecipeListFragment : BaseFragment<FragmentRecipeListBinding>(
 ) {
 
     private val viewModel: RecipeListViewModel by viewModel()
-    private val recipeListAdapter: RecipeListAdapter by inject()
+    private val recipeListAdapter by inject<RecipeListAdapter> {
+        parametersOf({ recipeId: Int -> navigateToRecipeDetails(recipeId) })
+    }
 
     override fun onBind() = FragmentRecipeListBinding.inflate(layoutInflater)
 
@@ -59,5 +64,12 @@ class RecipeListFragment : BaseFragment<FragmentRecipeListBinding>(
         recipeListErrorContainer.btnTryAgain.setOnClickListener {
             viewModel.getRecipes()
         }
+    }
+
+    private fun navigateToRecipeDetails(recipeId: Int) {
+        val action = RecipeListFragmentDirections.actionToRecipeDetailsFragment(
+            recipeId = recipeId
+        )
+        findNavController().navigateWithDirections(action)
     }
 }

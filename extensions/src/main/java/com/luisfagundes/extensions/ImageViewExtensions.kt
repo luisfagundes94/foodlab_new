@@ -9,7 +9,7 @@ import androidx.annotation.RequiresApi
 import com.luisfagundes.model.PicassoModel
 import com.squareup.picasso.Picasso
 
-fun ImageView.load(url: String) = Picasso
+fun ImageView.load(url: String?) = Picasso
     .get()
     .load(url)
     .into(this)

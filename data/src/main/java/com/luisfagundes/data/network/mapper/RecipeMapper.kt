@@ -1,6 +1,7 @@
 package com.luisfagundes.data.network.mapper
 
 import com.luisfagundes.core.Response
+import com.luisfagundes.data.network.mapper.IngredientMapper.mapToDomain
 import com.luisfagundes.data.network.response.RecipeResponse
 import com.luisfagundes.domain.model.Recipe
 import com.luisfagundes.extensions.empty
@@ -32,6 +33,7 @@ object RecipeMapper {
             vegan = this.vegan,
             dishTypes = this.dishTypes ?: emptyList(),
             summary = this.summary,
-            sourceName = this.sourceName ?: String.empty()
+            sourceName = this.sourceName ?: String.empty(),
+            ingredients = this.extendedIngredients?.mapToDomain() ?: emptyList()
         )
 }

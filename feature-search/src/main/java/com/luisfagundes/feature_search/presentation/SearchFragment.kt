@@ -2,6 +2,7 @@ package com.luisfagundes.feature_search.presentation
 
 import android.widget.ImageView
 import android.widget.SearchView
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -9,14 +10,18 @@ import com.luisfagundes.base.BaseFragment
 import com.luisfagundes.commons_ui.utils.GridSpacingItemDecoration
 import com.luisfagundes.domain.model.Recipe
 import com.luisfagundes.extensions.hideVisibility
+import com.luisfagundes.extensions.navigateWithDirections
 import com.luisfagundes.extensions.showVisibility
+import com.luisfagundes.feature_recipe.NavigationRecipeDirections
 import com.luisfagundes.feature_recipe.presentation.list.RecipeListAdapter
+import com.luisfagundes.feature_recipe.presentation.list.RecipeListFragmentDirections
 import com.luisfagundes.feature_search.R
 import com.luisfagundes.feature_search.databinding.FragmentSearchBinding
 import com.luisfagundes.feature_search.model.SearchUiState
 import com.luisfagundes.feature_search.presentation.adapters.CuisineListAdapter
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.core.parameter.parametersOf
 
 class SearchFragment : BaseFragment<FragmentSearchBinding>(
     successViewId = R.id.search_success_container,
@@ -27,7 +32,9 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(
     private val viewModel: SearchViewModel by viewModel()
 
     private val cuisineListAdapter by inject<CuisineListAdapter>()
-    private val recipesAdapter by inject<RecipeListAdapter>()
+    private val recipeListAdapter by inject<RecipeListAdapter> {
+        parametersOf({ recipeId: Int -> navigateToRecipeDetails(recipeId) })
+    }
 
     override fun onBind() = FragmentSearchBinding.inflate(layoutInflater)
 
@@ -71,7 +78,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(
 
         setHasFixedSize(true)
         this.layoutManager = layoutManager
-        this.adapter = recipesAdapter
+        this.adapter = recipeListAdapter
     }
 
     private fun setupRecipesSearchViewListener() = with(binding.svRecipes) {
@@ -119,7 +126,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(
 
     private fun showRecipes(recipes: List<Recipe>) {
         super.showSuccess()
-        recipesAdapter.updateRecipes(recipes)
+        recipeListAdapter.updateRecipes(recipes)
     }
 
     private fun showCuisines() = with(binding) {
@@ -133,6 +140,13 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(
         rvCuisines.hideVisibility()
         rvFilteredRecipes.showVisibility()
         viewModel.fetchRecipesByQuery(query)
+    }
+
+    private fun navigateToRecipeDetails(recipeId: Int) {
+        val action = NavigationRecipeDirections.actionToRecipeDetailsFragment(
+            recipeId = recipeId
+        )
+        findNavController().navigateWithDirections(action)
     }
 
     private companion object {

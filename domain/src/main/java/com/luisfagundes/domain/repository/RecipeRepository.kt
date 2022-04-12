@@ -5,4 +5,5 @@ import com.luisfagundes.domain.model.Recipe
 
 interface RecipeRepository {
     suspend fun fetchRecipes(queryMap: Map<String, String>): Response<List<Recipe>>
+    suspend fun fetchRecipeDetails(id: Int): Response<Recipe>
 }

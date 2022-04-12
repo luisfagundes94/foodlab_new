@@ -3,4 +3,13 @@
     <string name="label_home">Home</string>
     <string name="label_recipe_details">Recipe Details</string>
     <string name="recipe_image_description">Recipe</string>
+    <string name="rating">Rating</string>
+    <string name="tag">Tag</string>
+    <string name="type">Type</string>
+    <string name="ingredients">Ingredients</string>
+    <string name="instructions">Instructions</string>
+    <string name="empty_list">Ops! não achamos nenhum resultado.</string>
+    <string name="minutes">min</string>
+    <string name="items">items</string>
+    <string name="servings">servings</string>
 </resources>

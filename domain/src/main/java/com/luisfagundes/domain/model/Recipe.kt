@@ -11,6 +11,7 @@ data class Recipe(
     val spoonacularScore: Int,
     val healthScore: Int,
     val cheap: Boolean,
+    val ingredients: List<Ingredient>,
     val vegetarian: Boolean,
     val vegan: Boolean,
     val dishTypes: List<String>,
