@@ -33,14 +33,7 @@ class RecipeListFragment : BaseFragment<FragmentRecipeListBinding>(
     }
 
     private fun setupRecipeListRecyclerView() = with(binding.rvRecipeList) {
-        val layoutManager = LinearLayoutManager(
-            requireContext(),
-            LinearLayoutManager.VERTICAL,
-            false
-        )
-
         setHasFixedSize(true)
-        this.layoutManager = layoutManager
         this.adapter = recipeListAdapter
     }
 
@@ -56,7 +49,7 @@ class RecipeListFragment : BaseFragment<FragmentRecipeListBinding>(
 
     private fun showRecipes(recipes: List<Recipe>) {
         super.showSuccess()
-        recipeListAdapter.updateRecipes(recipes)
+        recipeListAdapter.submitList(recipes)
     }
 
     override fun showError() = with(binding) {

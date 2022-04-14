@@ -74,10 +74,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(
     }
 
     private fun setupFilteredRecipesRecyclerView() = with(binding.rvFilteredRecipes) {
-        val layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-
         setHasFixedSize(true)
-        this.layoutManager = layoutManager
         this.adapter = recipeListAdapter
     }
 
@@ -126,7 +123,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(
 
     private fun showRecipes(recipes: List<Recipe>) {
         super.showSuccess()
-        recipeListAdapter.updateRecipes(recipes)
+        recipeListAdapter.submitList(recipes)
     }
 
     private fun showCuisines() = with(binding) {
