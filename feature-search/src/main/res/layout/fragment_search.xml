@@ -59,15 +59,16 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/small_margin"
                 android:nestedScrollingEnabled="false"
-                android:visibility="gone" />
+                android:orientation="vertical"
+                android:visibility="gone"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_cuisines"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/small_margin"
-                android:nestedScrollingEnabled="false" >
-            </androidx.recyclerview.widget.RecyclerView>
+                android:nestedScrollingEnabled="false" />
 
         </LinearLayout>
 

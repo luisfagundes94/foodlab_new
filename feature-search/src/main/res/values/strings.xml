@@ -6,4 +6,5 @@
     <string name="results">Results</string>
     <string name="search_recipe_hint">Search recipe…</string>
     <string name="search_recipe">Search Recipes</string>
+    <string name="img_cuisine_test">https://rbl-prod-blog-bucket.s3.ap-south-1.amazonaws.com/wp-content/uploads/2019/12/17113725/5-hot-new-cuisines-mob.jpg</string>
 </resources>

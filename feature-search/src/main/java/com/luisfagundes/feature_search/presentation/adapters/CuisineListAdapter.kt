@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.luisfagundes.domain.model.cuisines
 import com.luisfagundes.extensions.load
+import com.luisfagundes.feature_search.R
 import com.luisfagundes.feature_search.databinding.LayoutCuisineItemBinding
 
 class CuisineListAdapter: RecyclerView.Adapter<CuisineListAdapter.ViewHolder>() {
@@ -29,7 +30,7 @@ class CuisineListAdapter: RecyclerView.Adapter<CuisineListAdapter.ViewHolder>() 
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(cuisineName: String) = with(binding) {
             name.text = cuisineName
-            image.load("https://rbl-prod-blog-bucket.s3.ap-south-1.amazonaws.com/wp-content/uploads/2019/12/17113725/5-hot-new-cuisines-mob.jpg")
+            image.load(binding.root.context.getString(R.string.img_cuisine_test))
         }
     }
 }
