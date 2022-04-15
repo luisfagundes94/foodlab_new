@@ -7,13 +7,18 @@ import com.luisfagundes.domain.model.Recipe
 
 class RecipeListAdapter(
     private val navigateToRecipeDetail: (recipeId: Int) -> Unit
-): PagingDataAdapter<Recipe, RecipeListViewHolder>(diffCallback) {
+) : PagingDataAdapter<Recipe, RecipeListViewHolder>(diffCallback) {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecipeListViewHolder {
-        return RecipeListViewHolder.create(parent, navigateToRecipeDetail)
-    }
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int
+    ) = RecipeListViewHolder.create(parent, navigateToRecipeDetail)
 
-    override fun onBindViewHolder(holder: RecipeListViewHolder, position: Int) {
+
+    override fun onBindViewHolder(
+        holder: RecipeListViewHolder,
+        position: Int
+    ) {
         getItem(position)?.let { holder.bind(it) }
     }
 

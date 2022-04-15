@@ -25,6 +25,9 @@ dependencies {
     implementation(project(":domain"))
     implementation(project(":data"))
 
+    // Lifecycle
+    implementation(Dependencies.Lifecycle.runtime)
+
     // UI
     implementation(Dependencies.UI.shimmerEffect)
     implementation(Dependencies.UI.picasso)
