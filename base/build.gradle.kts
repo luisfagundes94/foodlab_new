@@ -39,6 +39,7 @@ android {
 dependencies {
     // Modules
     implementation(project(":extensions"))
+    implementation(project(":core"))
 
     // Core
     val appCompatVersion = "1.4.1"
@@ -55,4 +56,8 @@ dependencies {
     val coroutinesVersion = "1.6.1"
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion")
+
+    // Paging
+    val pagingVersion = "3.1.1"
+    implementation("androidx.paging:paging-common-ktx:$pagingVersion")
 }

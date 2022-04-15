@@ -1,3 +1,6 @@
+import com.luisfagundes.buildSrc.Versions
+import com.luisfagundes.buildSrc.Dependencies
+
 plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
@@ -34,8 +37,15 @@ android {
 
 dependencies {
     implementation(project(":core"))
+    implementation(project(":base"))
 
     // DI
-    implementation(com.luisfagundes.buildSrc.Dependencies.DI.koin)
-    implementation(com.luisfagundes.buildSrc.Dependencies.DI.koinCore)
+    implementation(Dependencies.DI.koin)
+    implementation(Dependencies.DI.koinCore)
+
+    // Data
+    implementation(Dependencies.Data.paging3)
+
+    // Core
+    implementation(Dependencies.Core.coroutinesCore)
 }

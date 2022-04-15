@@ -23,10 +23,10 @@ class SearchViewModel(
         queryParams["query"] = query
 
         _searchUiState.postValue(SearchUiState.Loading)
-        executeCoroutines(dispatcher) {
-            searchRecipes(queryParams)
-                .fold(::onFetchRecipesSuccess, ::onFetchRecipesFailure)
-        }
+//        executeCoroutines(dispatcher) {
+//            searchRecipes(queryParams)
+//                .fold(::onFetchRecipesSuccess, ::onFetchRecipesFailure)
+//        }
     }
 
     private fun onFetchRecipesSuccess(recipes: List<Recipe>) {

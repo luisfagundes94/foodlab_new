@@ -25,6 +25,7 @@ object Dependencies {
         const val roomKtx = "androidx.room:room-ktx:${Versions.room}"
         const val roomCompiler = "androidx.room:room-compiler:${Versions.room}"
         const val loggingInterceptor = "com.github.ihsanbal:LoggingInterceptor:${Versions.loggingInterceptor}"
+        const val paging3 = "androidx.paging:paging-common-ktx:${Versions.paging3}"
     }
 
     object UI {

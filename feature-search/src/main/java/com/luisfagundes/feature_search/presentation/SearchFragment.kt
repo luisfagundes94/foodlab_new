@@ -23,11 +23,7 @@ import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
-class SearchFragment : BaseFragment<FragmentSearchBinding>(
-    successViewId = R.id.search_success_container,
-    loadingViewId = R.id.search_loading_container,
-    errorViewId = R.id.search_error_container
-) {
+class SearchFragment : BaseFragment<FragmentSearchBinding>() {
 
     private val viewModel: SearchViewModel by viewModel()
 
@@ -40,7 +36,6 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(
 
     override fun FragmentSearchBinding.onViewCreated() {
         setupViews()
-        setupObservers()
     }
 
     private fun setupViews() {
@@ -110,20 +105,9 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(
         clearFocus()
     }
 
-    private fun setupObservers() {
-        viewModel.searchUiState.observe(viewLifecycleOwner) {
-            when (it) {
-                is SearchUiState.Success -> showRecipes(it.recipes)
-                is SearchUiState.Loading -> showLoading()
-                is SearchUiState.Error -> showError()
-                else -> showError()
-            }
-        }
-    }
 
     private fun showRecipes(recipes: List<Recipe>) {
-        super.showSuccess()
-        recipeListAdapter.submitList(recipes)
+
     }
 
     private fun showCuisines() = with(binding) {

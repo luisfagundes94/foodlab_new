@@ -1,22 +1,18 @@
 package com.luisfagundes.feature_recipe.presentation.list
 
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.paging.LoadState
 import com.luisfagundes.base.BaseFragment
-import com.luisfagundes.domain.model.Recipe
 import com.luisfagundes.extensions.navigateWithDirections
-import com.luisfagundes.feature_recipe.R
 import com.luisfagundes.feature_recipe.databinding.FragmentRecipeListBinding
-import com.luisfagundes.feature_recipe.model.RecipesUiState
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
-class RecipeListFragment : BaseFragment<FragmentRecipeListBinding>(
-    loadingViewId = R.id.recipe_list_loading_container,
-    successViewId = R.id.recipe_list_success_container,
-    errorViewId = R.id.recipe_list_error_container
-) {
+class RecipeListFragment : BaseFragment<FragmentRecipeListBinding>() {
 
     private val viewModel: RecipeListViewModel by viewModel()
     private val recipeListAdapter by inject<RecipeListAdapter> {
@@ -27,9 +23,13 @@ class RecipeListFragment : BaseFragment<FragmentRecipeListBinding>(
 
     override fun FragmentRecipeListBinding.onViewCreated() {
         setupRecipeListRecyclerView()
-        setupObservers()
+        observeState()
 
-        viewModel.getRecipes()
+        lifecycleScope.launch {
+            viewModel.getRecipesPagingData().collect { pagingData ->
+                recipeListAdapter.submitData(pagingData)
+            }
+        }
     }
 
     private fun setupRecipeListRecyclerView() = with(binding.rvRecipeList) {
@@ -37,25 +37,13 @@ class RecipeListFragment : BaseFragment<FragmentRecipeListBinding>(
         this.adapter = recipeListAdapter
     }
 
-    private fun setupObservers() {
-        viewModel.recipesUiState.observe(viewLifecycleOwner) { recipesUiState ->
-            when (recipesUiState) {
-                is RecipesUiState.Success -> showRecipes(recipesUiState.recipes)
-                is RecipesUiState.Loading -> showLoading()
-                is RecipesUiState.Error -> showError()
+    private fun observeState() = lifecycleScope.launch {
+        recipeListAdapter.loadStateFlow.collectLatest { loadState ->
+            binding.rootContainer.displayedChild = when (loadState.refresh) {
+                is LoadState.Loading -> FLIPPER_CHILD_LOADING
+                is LoadState.NotLoading -> FLIPPER_CHILD_SUCCESS
+                is LoadState.Error -> FLIPPER_CHILD_ERROR
             }
-        }
-    }
-
-    private fun showRecipes(recipes: List<Recipe>) {
-        super.showSuccess()
-        recipeListAdapter.submitList(recipes)
-    }
-
-    override fun showError() = with(binding) {
-        super.showError()
-        recipeListErrorContainer.btnTryAgain.setOnClickListener {
-            viewModel.getRecipes()
         }
     }
 

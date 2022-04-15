@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ViewFlipper
 import androidx.annotation.IdRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -11,12 +12,9 @@ import androidx.viewbinding.ViewBinding
 import com.luisfagundes.extensions.hideVisibility
 import com.luisfagundes.extensions.showVisibility
 
-abstract class BaseFragment<Binding : ViewBinding>(
-    @IdRes private val successViewId: Int,
-    @IdRes private val loadingViewId: Int,
-    @IdRes private val errorViewId: Int
-) : Fragment() {
+abstract class BaseFragment<Binding : ViewBinding>: Fragment() {
 
+    private lateinit var viewFlipper: ViewFlipper
     private lateinit var successView: ViewGroup
     private lateinit var loadingView: ViewGroup
     private lateinit var errorView: ViewGroup
@@ -37,10 +35,6 @@ abstract class BaseFragment<Binding : ViewBinding>(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setupSuccess(view)
-        setupLoading(view)
-        setupError(view)
-
         binding.onViewCreated()
     }
 
@@ -53,36 +47,9 @@ abstract class BaseFragment<Binding : ViewBinding>(
 
     abstract fun Binding.onViewCreated()
 
-    private fun setupSuccess(view: View) {
-        successView = view.findViewById(successViewId)
+    companion object {
+        const val FLIPPER_CHILD_LOADING = 0
+        const val FLIPPER_CHILD_ERROR = 1
+        const val FLIPPER_CHILD_SUCCESS = 2
     }
-
-    private fun setupLoading(view: View) {
-        loadingView = view.findViewById(loadingViewId)
-    }
-
-    private fun setupError(view: View) {
-        errorView = view.findViewById(errorViewId)
-    }
-
-    open fun showSuccess() {
-        successView.showVisibility()
-        errorView.hideVisibility()
-        loadingView.hideVisibility()
-    }
-
-    open fun showLoading() {
-        loadingView.showVisibility()
-        errorView.hideVisibility()
-        successView.hideVisibility()
-    }
-
-    open fun showError() {
-        errorView.showVisibility()
-        successView.hideVisibility()
-        loadingView.hideVisibility()
-    }
-
-    open fun setupUpActionButton() =
-        (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
 }
