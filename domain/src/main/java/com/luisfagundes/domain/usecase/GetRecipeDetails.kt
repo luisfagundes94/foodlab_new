@@ -1,10 +1,20 @@
 package com.luisfagundes.domain.usecase
 
-import com.luisfagundes.core.Response
+import com.luisfagundes.base.BaseUseCase
+import com.luisfagundes.core.ResultStatus
 import com.luisfagundes.domain.model.Recipe
 import com.luisfagundes.domain.repository.RecipeRepository
 
-class GetRecipeDetails(private val recipeRepository: RecipeRepository) {
-    suspend operator fun invoke(recipeId: Int): Response<Recipe> =
-        recipeRepository.fetchRecipeDetails(recipeId)
+class GetRecipeDetails(
+    private val repository: RecipeRepository
+): BaseUseCase<GetRecipeDetails.GetRecipeDetailsParams, Recipe>() {
+
+    data class GetRecipeDetailsParams(
+        val id: Int
+    )
+
+    override suspend fun doWork(params: GetRecipeDetailsParams): ResultStatus<Recipe> {
+        val result = repository.fetchRecipeDetails(params.id)
+        return ResultStatus.Success(result)
+    }
 }

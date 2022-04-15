@@ -1,20 +1,25 @@
 package com.luisfagundes.feature_recipe.presentation.list
 
 import android.view.ViewGroup
+import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
 import com.luisfagundes.domain.model.Recipe
 
 class RecipeListAdapter(
     private val navigateToRecipeDetail: (recipeId: Int) -> Unit
-): ListAdapter<Recipe, RecipeListViewHolder>(diffCallback) {
+) : PagingDataAdapter<Recipe, RecipeListViewHolder>(diffCallback) {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecipeListViewHolder {
-        return RecipeListViewHolder.create(parent, navigateToRecipeDetail)
-    }
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int
+    ) = RecipeListViewHolder.create(parent, navigateToRecipeDetail)
 
-    override fun onBindViewHolder(holder: RecipeListViewHolder, position: Int) {
-        holder.bind(getItem(position))
+
+    override fun onBindViewHolder(
+        holder: RecipeListViewHolder,
+        position: Int
+    ) {
+        getItem(position)?.let { holder.bind(it) }
     }
 
     companion object {

@@ -12,4 +12,5 @@
     <string name="minutes">min</string>
     <string name="items">items</string>
     <string name="servings">servings</string>
+    <string name="recipe_item_load_more_error">Error fetching more recipes. Please Try Again.</string>
 </resources>

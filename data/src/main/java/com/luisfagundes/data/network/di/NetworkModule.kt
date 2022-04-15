@@ -4,6 +4,9 @@ import com.luisfagundes.data.BuildConfig
 import com.luisfagundes.data.network.ApiService
 import com.luisfagundes.data.network.interceptor.AuthInterception
 import com.luisfagundes.data.network.repository.RecipeRepositoryImpl
+import com.luisfagundes.data.network.response.DataContainerResponse
+import com.luisfagundes.data.remote.RemoteRecipeDataSourceImpl
+import com.luisfagundes.domain.datasource.RecipeRemoteDataSource
 import com.luisfagundes.domain.repository.RecipeRepository
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -16,6 +19,8 @@ private const val TIME_OUT = 15L
 
 @Suppress("RemoveExplicitTypeArguments", "USELESS_CAST")
 val networkModule = module {
+
+    single { RemoteRecipeDataSourceImpl(get()) as RecipeRemoteDataSource }
 
     single { RecipeRepositoryImpl(get()) as RecipeRepository }
 

@@ -25,6 +25,7 @@ object Dependencies {
         const val roomKtx = "androidx.room:room-ktx:${Versions.room}"
         const val roomCompiler = "androidx.room:room-compiler:${Versions.room}"
         const val loggingInterceptor = "com.github.ihsanbal:LoggingInterceptor:${Versions.loggingInterceptor}"
+        const val paging3 = "androidx.paging:paging-common-ktx:${Versions.paging3}"
     }
 
     object UI {
@@ -65,5 +66,7 @@ object Dependencies {
     object Lifecycle {
         const val liveData = "androidx.lifecycle:lifecycle-livedata-ktx:${Versions.lifecycle}"
         const val viewModel = "androidx.lifecycle.lifecycle-viewmodel-ktx:${Versions.lifecycle}"
+        const val runtime = "androidx.lifecycle:lifecycle-runtime-ktx:${Versions.lifecycle}"
+
     }
 }

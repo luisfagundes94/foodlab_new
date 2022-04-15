@@ -13,11 +13,7 @@ import com.luisfagundes.feature_recipe.model.RecipeDetailsState
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class RecipeDetailsFragment : BaseFragment<FragmentRecipeDetailsBinding>(
-    successViewId = R.id.recipe_details_success_container,
-    loadingViewId = R.id.recipe_details_loading_container,
-    errorViewId = R.id.recipe_details_error_container
-) {
+class RecipeDetailsFragment : BaseFragment<FragmentRecipeDetailsBinding>() {
 
     private val viewModel: RecipeDetailsViewModel by viewModel()
     private val args: RecipeDetailsFragmentArgs by navArgs()
@@ -27,14 +23,13 @@ class RecipeDetailsFragment : BaseFragment<FragmentRecipeDetailsBinding>(
 
     override fun FragmentRecipeDetailsBinding.onViewCreated() {
         setupViews()
-        setupObservers()
+        observeUiStatus()
 
         viewModel.fetchRecipeDetails(args.recipeId)
     }
 
     private fun setupViews() {
         setupRecyclerView()
-        setupUpActionButton()
     }
 
     private fun setupRecyclerView() = with(binding.rvIngredients) {
@@ -49,28 +44,17 @@ class RecipeDetailsFragment : BaseFragment<FragmentRecipeDetailsBinding>(
         this.adapter = this@RecipeDetailsFragment.ingredientAdapter
     }
 
-    private fun setupObservers() {
-        viewModel.recipe.observe(viewLifecycleOwner) {
-            when (it) {
-                is RecipeDetailsState.Success -> showRecipeDetails(it.data)
+    private fun observeUiStatus() {
+        viewModel.uiState.observe(viewLifecycleOwner) { state ->
+            binding.viewFlipperContainer.displayedChild = when (state) {
                 is RecipeDetailsState.Loading -> showLoading()
+                is RecipeDetailsState.Success -> showSuccess(state.data)
                 is RecipeDetailsState.Error -> showError()
-                else -> showError()
             }
         }
     }
 
-    override fun showError() = with(binding) {
-        super.showError()
-
-        recipeDetailsErrorContainer.btnTryAgain.setOnClickListener {
-            viewModel.fetchRecipeDetails(args.recipeId)
-        }
-    }
-
-    private fun showRecipeDetails(recipe: Recipe) = with(binding) {
-        super.showSuccess()
-
+    private fun showSuccess(recipe: Recipe): Int = with(binding) {
         imgRecipe.load(recipe.image)
         tvTitle.text = recipe.title
         tvDescription.text = HtmlCompat.fromHtml(recipe.summary, HtmlCompat.FROM_HTML_MODE_LEGACY)
@@ -79,6 +63,8 @@ class RecipeDetailsFragment : BaseFragment<FragmentRecipeDetailsBinding>(
         tvServe.text = getServeFormattedText(recipe)
         tvIngredientsSize.text = getIngredientCountFormattedText(recipe)
         ingredientAdapter.updateIngredients(recipe.ingredients)
+
+        return FLIPPER_CHILD_SUCCESS
     }
 
     private fun getReadyInMinutesFormattedText(recipe: Recipe) =
@@ -90,4 +76,10 @@ class RecipeDetailsFragment : BaseFragment<FragmentRecipeDetailsBinding>(
     private fun getIngredientCountFormattedText(recipe: Recipe) =
         "${recipe.ingredients.count()} ${getString(R.string.items)}"
 
+    private fun showError(): Int {
+        binding.recipeDetailsErrorContainer.btnTryAgain.setOnClickListener {
+            viewModel.fetchRecipeDetails(args.recipeId)
+        }
+        return FLIPPER_CHILD_ERROR
+    }
 }

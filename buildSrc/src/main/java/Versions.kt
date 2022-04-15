@@ -29,6 +29,7 @@ object Versions {
     const val preferencesKtx = "1.1.0"
     const val room = "2.2.6"
     const val loggingInterceptor = "3.1.0"
+    const val paging3 = "3.1.1"
 
     // UI
     const val picasso = "2.71828"

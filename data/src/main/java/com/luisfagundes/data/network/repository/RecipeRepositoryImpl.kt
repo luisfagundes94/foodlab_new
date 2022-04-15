@@ -1,26 +1,19 @@
 package com.luisfagundes.data.network.repository
 
-import com.luisfagundes.core.Response
-import com.luisfagundes.data.network.ApiService
-import com.luisfagundes.data.network.mapper.RecipeDetailsMapper.mapToDomain
-import com.luisfagundes.data.network.mapper.RecipeMapper.mapToDomain
+import androidx.paging.PagingSource
+import com.luisfagundes.data.network.paging.RecipePagingSource
+import com.luisfagundes.domain.datasource.RecipeRemoteDataSource
 import com.luisfagundes.domain.model.Recipe
 import com.luisfagundes.domain.repository.RecipeRepository
 
 class RecipeRepositoryImpl(
-    private val apiService: ApiService
+    private val remoteDataSource: RecipeRemoteDataSource
 ) : RecipeRepository {
-    override suspend fun fetchRecipes(queryMap: Map<String, String>): Response<List<Recipe>> {
-        val response = Response.listOf {
-            apiService.fetchRecipes(queryMap).results
-        }
-        return response.mapToDomain()
+    override fun fetchRecipes(queryMap: HashMap<String, String>): PagingSource<Int, Recipe> {
+        return RecipePagingSource(remoteDataSource, queryMap)
     }
 
-    override suspend fun fetchRecipeDetails(id: Int): Response<Recipe> {
-        val response = Response.of {
-            apiService.fetchRecipeDetails(id)
-        }
-        return response.mapToDomain()
+    override suspend fun fetchRecipeDetails(id: Int): Recipe {
+        return remoteDataSource.fetchRecipeDetails(id)
     }
 }

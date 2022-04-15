@@ -37,7 +37,7 @@ android {
 
 dependencies {
 
-    // Core
+    // Modules
     implementation(project(":core"))
     implementation(project(":domain"))
     implementation(project(":extensions"))
@@ -48,6 +48,7 @@ dependencies {
     implementation(Dependencies.Data.okHttpLogging)
     implementation(Dependencies.Data.okHttp)
     implementation(Dependencies.Data.loggingInterceptor)
+    api(Dependencies.Data.paging3)
 
     // DI
     implementation(Dependencies.DI.koin)

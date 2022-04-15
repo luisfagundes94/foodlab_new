@@ -1,9 +1,9 @@
 package com.luisfagundes.domain.repository
 
-import com.luisfagundes.core.Response
+import androidx.paging.PagingSource
 import com.luisfagundes.domain.model.Recipe
 
 interface RecipeRepository {
-    suspend fun fetchRecipes(queryMap: Map<String, String>): Response<List<Recipe>>
-    suspend fun fetchRecipeDetails(id: Int): Response<Recipe>
+    fun fetchRecipes(queryMap: HashMap<String, String>): PagingSource<Int, Recipe>
+    suspend fun fetchRecipeDetails(id: Int): Recipe
 }

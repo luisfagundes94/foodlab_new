@@ -1,22 +1,23 @@
 package com.luisfagundes.feature_recipe.presentation.list
 
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.paging.LoadState
+import androidx.paging.PagingData
 import com.luisfagundes.base.BaseFragment
 import com.luisfagundes.domain.model.Recipe
 import com.luisfagundes.extensions.navigateWithDirections
-import com.luisfagundes.feature_recipe.R
 import com.luisfagundes.feature_recipe.databinding.FragmentRecipeListBinding
-import com.luisfagundes.feature_recipe.model.RecipesUiState
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
-class RecipeListFragment : BaseFragment<FragmentRecipeListBinding>(
-    loadingViewId = R.id.recipe_list_loading_container,
-    successViewId = R.id.recipe_list_success_container,
-    errorViewId = R.id.recipe_list_error_container
-) {
+class RecipeListFragment : BaseFragment<FragmentRecipeListBinding>() {
 
     private val viewModel: RecipeListViewModel by viewModel()
     private val recipeListAdapter by inject<RecipeListAdapter> {
@@ -27,36 +28,40 @@ class RecipeListFragment : BaseFragment<FragmentRecipeListBinding>(
 
     override fun FragmentRecipeListBinding.onViewCreated() {
         setupRecipeListRecyclerView()
-        setupObservers()
+        observeState()
 
-        viewModel.getRecipes()
-    }
-
-    private fun setupRecipeListRecyclerView() = with(binding.rvRecipeList) {
-        setHasFixedSize(true)
-        this.adapter = recipeListAdapter
-    }
-
-    private fun setupObservers() {
-        viewModel.recipesUiState.observe(viewLifecycleOwner) { recipesUiState ->
-            when (recipesUiState) {
-                is RecipesUiState.Success -> showRecipes(recipesUiState.recipes)
-                is RecipesUiState.Loading -> showLoading()
-                is RecipesUiState.Error -> showError()
+        lifecycleScope.launch {
+            viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.getRecipesPagingData().collect { pagingData ->
+                    recipeListAdapter.submitData(pagingData)
+                }
             }
         }
     }
 
-    private fun showRecipes(recipes: List<Recipe>) {
-        super.showSuccess()
-        recipeListAdapter.submitList(recipes)
+    private fun setupRecipeListRecyclerView() = with(binding.rvRecipeList) {
+        scrollToPosition(FIRST_ITEM_POSITION)
+        setHasFixedSize(true)
+        this.adapter = recipeListAdapter.withLoadStateFooter(
+            footer = RecipeListLoadStateAdapter(recipeListAdapter::retry)
+        )
     }
 
-    override fun showError() = with(binding) {
-        super.showError()
-        recipeListErrorContainer.btnTryAgain.setOnClickListener {
-            viewModel.getRecipes()
+    private fun observeState() = lifecycleScope.launch {
+        recipeListAdapter.loadStateFlow.collectLatest { loadState ->
+            binding.rootContainer.displayedChild = when (loadState.refresh) {
+                is LoadState.Loading -> FLIPPER_CHILD_LOADING
+                is LoadState.NotLoading -> FLIPPER_CHILD_SUCCESS
+                is LoadState.Error -> showError()
+            }
         }
+    }
+
+    private fun showError(): Int {
+        binding.recipeListErrorContainer.btnTryAgain.setOnClickListener {
+            recipeListAdapter.refresh()
+        }
+        return FLIPPER_CHILD_ERROR
     }
 
     private fun navigateToRecipeDetails(recipeId: Int) {
@@ -64,5 +69,9 @@ class RecipeListFragment : BaseFragment<FragmentRecipeListBinding>(
             recipeId = recipeId
         )
         findNavController().navigateWithDirections(action)
+    }
+
+    private companion object {
+        const val FIRST_ITEM_POSITION = 0
     }
 }

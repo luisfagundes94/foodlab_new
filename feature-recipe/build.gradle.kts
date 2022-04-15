@@ -25,7 +25,11 @@ dependencies {
     implementation(project(":domain"))
     implementation(project(":data"))
 
+    // Lifecycle
+    implementation(Dependencies.Lifecycle.runtime)
+
     // UI
     implementation(Dependencies.UI.shimmerEffect)
     implementation(Dependencies.UI.picasso)
+    api("androidx.paging:paging-runtime-ktx:3.1.1")
 }
