@@ -1,5 +1,9 @@
 package com.luisfagundes.domain.datasource
 
-interface RecipeRemoteDataSource<T> {
-    suspend fun fetchRecipes(queries: HashMap<String, String>): T
+import com.luisfagundes.domain.model.Recipe
+import com.luisfagundes.domain.model.RecipeListPaging
+
+interface RecipeRemoteDataSource {
+    suspend fun fetchRecipes(queries: HashMap<String, String>): RecipeListPaging
+    suspend fun fetchRecipeDetails(id: Int): Recipe
 }

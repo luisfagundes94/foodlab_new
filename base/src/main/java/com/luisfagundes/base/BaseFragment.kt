@@ -47,6 +47,8 @@ abstract class BaseFragment<Binding : ViewBinding>: Fragment() {
 
     abstract fun Binding.onViewCreated()
 
+    open fun showLoading() = FLIPPER_CHILD_LOADING
+
     companion object {
         const val FLIPPER_CHILD_LOADING = 0
         const val FLIPPER_CHILD_ERROR = 1

@@ -5,4 +5,5 @@ import com.luisfagundes.domain.model.Recipe
 
 interface RecipeRepository {
     fun fetchRecipes(queryMap: HashMap<String, String>): PagingSource<Int, Recipe>
+    suspend fun fetchRecipeDetails(id: Int): Recipe
 }

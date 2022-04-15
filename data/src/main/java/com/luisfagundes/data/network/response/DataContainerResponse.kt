@@ -6,3 +6,5 @@ data class DataContainerResponse(
     val totalResults: Int,
     val results: List<RecipeResponse>
 )
+
+

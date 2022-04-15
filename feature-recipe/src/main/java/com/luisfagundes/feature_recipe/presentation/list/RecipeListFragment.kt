@@ -3,6 +3,7 @@ package com.luisfagundes.feature_recipe.presentation.list
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
 import androidx.paging.PagingData
@@ -32,14 +33,10 @@ class RecipeListFragment : BaseFragment<FragmentRecipeListBinding>() {
         lifecycleScope.launch {
             viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.getRecipesPagingData().collect { pagingData ->
-                    updateRecipes(pagingData)
+                    recipeListAdapter.submitData(pagingData)
                 }
             }
         }
-    }
-
-    private suspend fun updateRecipes(pagingData: PagingData<Recipe>) {
-        recipeListAdapter.submitData(pagingData)
     }
 
     private fun setupRecipeListRecyclerView() = with(binding.rvRecipeList) {

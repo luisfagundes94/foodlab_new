@@ -23,6 +23,9 @@ class RecipeDetailsFragment : BaseFragment<FragmentRecipeDetailsBinding>() {
 
     override fun FragmentRecipeDetailsBinding.onViewCreated() {
         setupViews()
+        observeUiStatus()
+
+        viewModel.fetchRecipeDetails(args.recipeId)
     }
 
     private fun setupViews() {
@@ -41,7 +44,17 @@ class RecipeDetailsFragment : BaseFragment<FragmentRecipeDetailsBinding>() {
         this.adapter = this@RecipeDetailsFragment.ingredientAdapter
     }
 
-    private fun showRecipeDetails(recipe: Recipe) = with(binding) {
+    private fun observeUiStatus() {
+        viewModel.uiState.observe(viewLifecycleOwner) { state ->
+            binding.viewFlipperContainer.displayedChild = when (state) {
+                is RecipeDetailsState.Loading -> showLoading()
+                is RecipeDetailsState.Success -> showSuccess(state.data)
+                is RecipeDetailsState.Error -> showError()
+            }
+        }
+    }
+
+    private fun showSuccess(recipe: Recipe): Int = with(binding) {
         imgRecipe.load(recipe.image)
         tvTitle.text = recipe.title
         tvDescription.text = HtmlCompat.fromHtml(recipe.summary, HtmlCompat.FROM_HTML_MODE_LEGACY)
@@ -50,6 +63,8 @@ class RecipeDetailsFragment : BaseFragment<FragmentRecipeDetailsBinding>() {
         tvServe.text = getServeFormattedText(recipe)
         tvIngredientsSize.text = getIngredientCountFormattedText(recipe)
         ingredientAdapter.updateIngredients(recipe.ingredients)
+
+        return FLIPPER_CHILD_SUCCESS
     }
 
     private fun getReadyInMinutesFormattedText(recipe: Recipe) =
@@ -61,4 +76,10 @@ class RecipeDetailsFragment : BaseFragment<FragmentRecipeDetailsBinding>() {
     private fun getIngredientCountFormattedText(recipe: Recipe) =
         "${recipe.ingredients.count()} ${getString(R.string.items)}"
 
+    private fun showError(): Int {
+        binding.recipeDetailsErrorContainer.btnTryAgain.setOnClickListener {
+            viewModel.fetchRecipeDetails(args.recipeId)
+        }
+        return FLIPPER_CHILD_ERROR
+    }
 }

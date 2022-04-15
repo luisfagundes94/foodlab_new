@@ -20,7 +20,7 @@ private const val TIME_OUT = 15L
 @Suppress("RemoveExplicitTypeArguments", "USELESS_CAST")
 val networkModule = module {
 
-    single { RemoteRecipeDataSourceImpl(get()) as RecipeRemoteDataSource<DataContainerResponse> }
+    single { RemoteRecipeDataSourceImpl(get()) as RecipeRemoteDataSource }
 
     single { RecipeRepositoryImpl(get()) as RecipeRepository }
 

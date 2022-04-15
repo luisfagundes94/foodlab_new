@@ -2,13 +2,11 @@ package com.luisfagundes.data.network.paging
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.luisfagundes.data.network.response.DataContainerResponse
-import com.luisfagundes.data.network.response.toDomainModel
 import com.luisfagundes.domain.datasource.RecipeRemoteDataSource
 import com.luisfagundes.domain.model.Recipe
 
 class RecipePagingSource(
-    private val remoteDataSource: RecipeRemoteDataSource<DataContainerResponse>,
+    private val remoteDataSource: RecipeRemoteDataSource,
     private val queryMap: HashMap<String, String>
 ) : PagingSource<Int, Recipe>() {
 
@@ -31,7 +29,7 @@ class RecipePagingSource(
         val totalRecipes = response.totalResults
 
         return LoadResult.Page(
-            data = response.results.map { it.toDomainModel() },
+            data = response.results,
             prevKey = null,
             nextKey = calculateNextKey(responseOffset, totalRecipes)
         )
