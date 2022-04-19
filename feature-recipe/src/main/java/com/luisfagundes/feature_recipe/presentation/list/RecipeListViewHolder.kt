@@ -5,7 +5,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.luisfagundes.domain.model.RecipeIntro
 import com.luisfagundes.extensions.load
-import com.luisfagundes.feature_recipe.R
 import com.luisfagundes.feature_recipe.databinding.LayoutRecipeItemBinding
 
 class RecipeListViewHolder(
@@ -17,7 +16,6 @@ class RecipeListViewHolder(
     fun bind(recipe: RecipeIntro) = with(binding) {
         imgRecipe.load(recipe.image)
         tvTitle.text = recipe.title
-        tvCalories.text = root.context.getString(R.string.calories, recipe.calories)
         rootContainer.setOnClickListener { navigateToRecipeDetail(recipe.id) }
     }
 
