@@ -6,6 +6,8 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
+import com.luisfagundes.extensions.hideVisibility
+import com.luisfagundes.extensions.showVisibility
 import com.luisfagundes.foodlab.R
 import com.luisfagundes.foodlab.databinding.ActivityNavigationBinding
 
@@ -33,7 +35,7 @@ class NavigationActivity : AppCompatActivity() {
 
         bottomNavView.setupWithNavController(navController)
         binding.toolbar.setupWithNavController(navController, getAppBarConfig())
-        setupAppBarBackButton(navController)
+        setupNavControllerListener(navController)
     }
 
     private fun getAppBarConfig() = AppBarConfiguration(
@@ -45,14 +47,23 @@ class NavigationActivity : AppCompatActivity() {
         )
     )
 
-    private fun setupAppBarBackButton(navController: NavController) {
+    private fun setupNavControllerListener(navController: NavController) {
         navController.addOnDestinationChangedListener { _, destination, _ ->
             val topLevelDestinations = getAppBarConfig().topLevelDestinations
             val isTopLevelDestination = topLevelDestinations.contains(destination.id)
             
-            if (!isTopLevelDestination) binding.toolbar.setNavigationIcon(
-                R.drawable.ic_baseline_arrow_back_24
-            )
+            if (!isTopLevelDestination) {
+                setupBackButton()
+                binding.bottomNavItems.hideVisibility()
+            } else {
+                binding.bottomNavItems.showVisibility()
+            }
         }
+    }
+
+    private fun setupBackButton() {
+        binding.toolbar.setNavigationIcon(
+            R.drawable.ic_baseline_arrow_back_24
+        )
     }
 }
