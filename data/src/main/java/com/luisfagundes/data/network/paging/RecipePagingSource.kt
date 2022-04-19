@@ -3,14 +3,14 @@ package com.luisfagundes.data.network.paging
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.luisfagundes.domain.datasource.RecipeRemoteDataSource
-import com.luisfagundes.domain.model.Recipe
+import com.luisfagundes.domain.model.RecipeIntro
 
 class RecipePagingSource(
     private val remoteDataSource: RecipeRemoteDataSource,
     private val queryMap: HashMap<String, String>
-) : PagingSource<Int, Recipe>() {
+) : PagingSource<Int, RecipeIntro>() {
 
-    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Recipe> {
+    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, RecipeIntro> {
         return try {
             getLoadResult(params)
         } catch (exception: Exception) {
@@ -18,7 +18,7 @@ class RecipePagingSource(
         }
     }
 
-    private suspend fun getLoadResult(params: LoadParams<Int>): LoadResult.Page<Int, Recipe> {
+    private suspend fun getLoadResult(params: LoadParams<Int>): LoadResult.Page<Int, RecipeIntro> {
         val offset = params.key ?: DEFAULT_OFFSET
         val queries = hashMapOf(OFFSET_KEY to offset.toString())
 
@@ -39,7 +39,7 @@ class RecipePagingSource(
         if (responseOffset < totalRecipes) responseOffset + RESULTS_PER_PAGE
         else null
 
-    override fun getRefreshKey(state: PagingState<Int, Recipe>): Int? {
+    override fun getRefreshKey(state: PagingState<Int, RecipeIntro>): Int? {
         return state.anchorPosition?.let { anchorPosition ->
             val anchorPage = state.closestPageToPosition(anchorPosition)
             anchorPage?.prevKey?.plus(RESULTS_PER_PAGE) ?: anchorPage?.nextKey?.minus(

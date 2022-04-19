@@ -7,6 +7,7 @@ import androidx.paging.cachedIn
 import com.luisfagundes.base.BasePagingViewModel
 import com.luisfagundes.base.BaseViewModel
 import com.luisfagundes.domain.model.Recipe
+import com.luisfagundes.domain.model.RecipeIntro
 import com.luisfagundes.domain.usecase.GetRecipes
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
@@ -16,9 +17,8 @@ class RecipeListViewModel(
     private val getRecipes: GetRecipes
 ) : BasePagingViewModel() {
 
-    fun getRecipesPagingData(): Flow<PagingData<Recipe>> {
+    fun getRecipesPagingData(): Flow<PagingData<RecipeIntro>> {
         val queryParams = hashMapOf<String, String>()
-        queryParams["addRecipeInformation"] = true.toString()
         queryParams["sort"] = "popularity"
 
         return getRecipes.invoke(

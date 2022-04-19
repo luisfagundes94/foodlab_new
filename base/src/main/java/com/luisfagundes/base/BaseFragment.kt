@@ -14,11 +14,6 @@ import com.luisfagundes.extensions.showVisibility
 
 abstract class BaseFragment<Binding : ViewBinding>: Fragment() {
 
-    private lateinit var viewFlipper: ViewFlipper
-    private lateinit var successView: ViewGroup
-    private lateinit var loadingView: ViewGroup
-    private lateinit var errorView: ViewGroup
-
     private var _binding: Binding? = null
     val binding: Binding
         get() = _binding ?: run {
