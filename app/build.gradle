@@ -1,4 +1,3 @@
-import com.luisfagundes.buildSrc.Dependencies
 import com.luisfagundes.buildSrc.Versions
 
 plugins {
@@ -41,4 +40,5 @@ dependencies {
     implementation project(':feature-favorites')
     implementation project(':data')
     implementation project(':domain')
+    implementation project(':usecases')
 }

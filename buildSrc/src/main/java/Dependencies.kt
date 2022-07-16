@@ -13,6 +13,7 @@ object Dependencies {
         const val navigationFragment = "androidx.navigation:navigation-fragment-ktx:${Versions.navigation}"
         const val navigationUi = "androidx.navigation:navigation-ui-ktx:${Versions.navigation}"
         const val timber = "com.jakewharton.timber:timber:${Versions.timber}"
+        const val paging3 = "androidx.paging:paging-common-ktx:${Versions.paging3}"
     }
 
     object Data {
@@ -25,7 +26,6 @@ object Dependencies {
         const val roomKtx = "androidx.room:room-ktx:${Versions.room}"
         const val roomCompiler = "androidx.room:room-compiler:${Versions.room}"
         const val loggingInterceptor = "com.github.ihsanbal:LoggingInterceptor:${Versions.loggingInterceptor}"
-        const val paging3 = "androidx.paging:paging-common-ktx:${Versions.paging3}"
     }
 
     object UI {
@@ -57,10 +57,11 @@ object Dependencies {
     }
 
     object Test {
-        const val junit = "junit:junit:${Versions.junit}"
+        const val junit4 = "junit:junit:${Versions.junit}"
         const val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-test:${Versions.coroutines}"
         const val mockk = "io.mockk:mockk:${Versions.mockk}"
         const val archCore = "androidx.arch.core:core-testing:${Versions.archCore}"
+        const val junit5 = "org.junit.jupiter:junit-jupiter"
     }
 
     object Lifecycle {

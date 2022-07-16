@@ -5,12 +5,11 @@ import androidx.lifecycle.MutableLiveData
 import com.luisfagundes.base.BaseViewModel
 import com.luisfagundes.core.ResultStatus
 import com.luisfagundes.domain.model.Recipe
-import com.luisfagundes.domain.usecase.GetRecipeDetails
 import com.luisfagundes.feature_recipe.model.RecipeDetailsState
+import com.luisfagundes.usecases.GetRecipeDetails
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
-import timber.log.Timber
 
 class RecipeDetailsViewModel(
     private val getRecipeDetails: GetRecipeDetails,

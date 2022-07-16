@@ -4,9 +4,8 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.luisfagundes.base.BasePagingViewModel
-import com.luisfagundes.domain.model.Recipe
 import com.luisfagundes.domain.model.RecipeIntro
-import com.luisfagundes.domain.usecase.GetRecipes
+import com.luisfagundes.usecases.GetRecipes
 import kotlinx.coroutines.flow.Flow
 
 class SearchViewModel(

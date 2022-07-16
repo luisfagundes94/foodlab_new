@@ -15,10 +15,10 @@ object Versions {
     const val gradle = "7.0.4"
 
     // Core
-    const val kotlin = "1.6.20"
+    const val kotlin = "1.7.10"
     const val appcompat = "1.4.1"
     const val material = "1.6.0-beta01"
-    const val coreKtx = "1.7.0"
+    const val coreKtx = "1.7.1"
     const val constraintLayout = "2.1.3"
     const val navigation = "2.4.2"
     const val timber = "5.0.1"
@@ -46,7 +46,7 @@ object Versions {
 
     // Test
     const val junit = "4.13.1"
-    const val coroutines = "1.6.1"
+    const val coroutines = "1.6.4"
     const val mockk = "1.12.1"
     const val archCore = "2.1.0"
 

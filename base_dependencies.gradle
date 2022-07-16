@@ -58,10 +58,4 @@ dependencies {
     // DI
     implementation Dependencies.DI.koinCore
     implementation Dependencies.DI.koin
-
-    // Testing
-    testImplementation Dependencies.Test.mockk
-    testImplementation Dependencies.Test.junit
-    testImplementation Dependencies.Test.coroutines
-    testImplementation Dependencies.Test.archCore
 }

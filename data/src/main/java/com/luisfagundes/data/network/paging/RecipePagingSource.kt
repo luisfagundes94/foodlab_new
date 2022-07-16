@@ -10,6 +10,7 @@ class RecipePagingSource(
     private val queryMap: HashMap<String, String>
 ) : PagingSource<Int, RecipeIntro>() {
 
+    @Suppress("TooGenericExceptionCaught")
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, RecipeIntro> {
         return try {
             getLoadResult(params)

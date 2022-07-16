@@ -24,6 +24,8 @@ dependencies {
     // Modules
     implementation(project(":domain"))
     implementation(project(":data"))
+    implementation(project(":commons-testing"))
+    implementation(project(":usecases"))
 
     // Lifecycle
     implementation(Dependencies.Lifecycle.runtime)

@@ -48,11 +48,13 @@ dependencies {
     implementation(Dependencies.Data.okHttpLogging)
     implementation(Dependencies.Data.okHttp)
     implementation(Dependencies.Data.loggingInterceptor)
-    api(Dependencies.Data.paging3)
 
     // DI
     implementation(Dependencies.DI.koin)
     implementation(Dependencies.DI.koinCore)
+
+    // Core
+    api(Dependencies.Core.paging3)
 }
 
 fun getApiKey() = apiKeyProperties["API_KEY"]
